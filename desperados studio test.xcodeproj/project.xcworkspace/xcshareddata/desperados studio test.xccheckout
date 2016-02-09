@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CE68624E-71F3-46C6-8093-412D646B763F</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1C584D82D8F91B619E103DBEA051F0CCC0070ED3</key>
+		<string>https://github.com/kylemcdonald/ofxDmx.git</string>
+		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
+		<string>https://github.com/whg/ofxMidi.git</string>
+		<key>BA1C00E456100C39E4E5DE61EC06B17F8DFBD9E3</key>
+		<string>https://github.com/whg/whelpersg.git</string>
+	</dict>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1C584D82D8F91B619E103DBEA051F0CCC0070ED3</key>
+		<string>ofxDmx/</string>
+		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
+		<string>ofxMidi/</string>
+		<key>BA1C00E456100C39E4E5DE61EC06B17F8DFBD9E3</key>
+		<string>../../../include/whelpersg</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/whg/ofxMidi.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>90E2F969A762FB62C413A0C44D1F334E6EC3F531</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1C584D82D8F91B619E103DBEA051F0CCC0070ED3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxDmx</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>90E2F969A762FB62C413A0C44D1F334E6EC3F531</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxMidi</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BA1C00E456100C39E4E5DE61EC06B17F8DFBD9E3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>whelpersg</string>
+		</dict>
+	</array>
+</dict>
+</plist>
