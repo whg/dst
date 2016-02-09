@@ -22,6 +22,8 @@ void ofApp::setup() {
         lightMap[meter] = "meter-" + ofToString(count++);
     }
     
+    
+    
     stringstream ss;
     for (const auto &pair : lightMap) {
         auto p = shared_ptr<ofParameter<int> >(new ofParameter<int>(ofToString(pair.first) + " : " + pair.second , 0, 0, 255));

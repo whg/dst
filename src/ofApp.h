@@ -36,4 +36,7 @@ public:
     ofParameter<bool> useDecay;
     ofParameter<float> decayAmount;
     float audioValue;
+    
+    
+    
 };
