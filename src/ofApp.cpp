@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-
+const int METER_CONTROL_NUMBER = 60;
 
 
 void ofApp::setup() {
@@ -12,50 +12,46 @@ void ofApp::setup() {
     
     midiIn.openPort("virtualMIDI");
     midiIn.addListener(this);
+
+    lightMap[1] = "chandelier";
+
+    meters = { 4, 7, 10, 13, 16, 19 };
     
-    
-    lightMap["strobe-intensity"] = 1;
-    lightMap["strobe-duration"]  = 2;
-    lightMap["strobe-rate"]      = 3;
-    
-    lightMap["wash1-intensity"]  = 4;
-    lightMap["wash1-shutter"]    = 5;
-    
-    lightMap["wash2-intensity"]  = 6;
-    lightMap["wash2-shutter"]    = 7;
-    
-    lightMap["mirror-uv"]        = 10; // 4
-    lightMap["blind-uv"]         = 13; // 5
-    lightMap["bath-uv"]          = 16; // 6
-    
-    lightMap["mirror-white"]     = 19; // 7
-    lightMap["blind-white"]      = 22; // 8
-    lightMap["bath-white"]       = 25; // 9
-    
-    lightMap["panel1"]           = 28; // 10
-    lightMap["panel2"]           = 31; // 11
-    
+    int count = 1;
+    for (auto meter : meters) {
+        lightMap[meter] = "meter-" + ofToString(count++);
+    }
     
     stringstream ss;
     for (const auto &pair : lightMap) {
-        auto p = shared_ptr<ofParameter<int> >(new ofParameter<int>(pair.first + " : " + ofToString(pair.second) , 0, 0, 255));
+        auto p = shared_ptr<ofParameter<int> >(new ofParameter<int>(ofToString(pair.first) + " : " + pair.second , 0, 0, 255));
         paramGroup.add(*(p.get()));
         channels[pair.first] = p;
     }
-//
     
     autoCycle.set("AutoCycle",false);
     panel.setup(paramGroup);
     
+    panel.add(maxMeterVal.set("maxMeterVal", 127, 0, 127));
+    panel.add(useDecay.set("use decay", true));
+    panel.add(decayAmount.set("decay", 1, 0.95, 1));
+
     
-    ofSetVerticalSync(false);
+    ofSetVerticalSync(true);
+    
+    
+    
 }
 
 void ofApp::update() {
-    int t = 200;
+    
+    if (useDecay) {
+        audioValue *= decayAmount;
+        setMeter(audioValue);
+    }
     
     for (const auto &chan : channels) {
-        dmx.setLevel(lightMap[chan.first], *chan.second.get());
+        dmx.setLevel(chan.first, *chan.second.get());
     }
     
     dmx.update();
@@ -72,32 +68,68 @@ void ofApp::draw() {
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
     
     if (msg.status == MIDI_CONTROL_CHANGE) {
-        for (const auto &pair : lightMap) {
-            auto lightIndex = pair.second;
-            auto lightName = pair.first;
-            if (msg.control == lightIndex) {
-                channels[lightName]->set(msg.value * 2);
+        if (msg.control == METER_CONTROL_NUMBER) {
+            if (useDecay) {
+                if (msg.value > audioValue) {
+                    setMeter(msg.value);
+                    audioValue = msg.value;
+                }
+            }
+            else {
+                setMeter(msg.value);
             }
         }
     }
     else if (msg.status == MIDI_NOTE_ON) {
         for (const auto &pair : lightMap) {
-            auto lightIndex = pair.second;
-            auto lightName = pair.first;
+            auto lightIndex = pair.first;
+            auto lightName = pair.second;
             if (msg.pitch == lightIndex) {
-                channels[lightName]->set(msg.velocity * 2);
+                channels[lightIndex]->set(msg.velocity * 2);
             }
         }
     }
     else if (msg.status == MIDI_NOTE_OFF) {
         for (const auto &pair : lightMap) {
-            auto lightIndex = pair.second;
-            auto lightName = pair.first;
+            auto lightIndex = pair.first;
+            auto lightName = pair.second;
             if (msg.pitch == lightIndex) {
-                channels[lightName]->set(0);
+                channels[lightIndex]->set(0);
             }
         }
     }
+}
+
+// set the 6 meter lights with one MIDI value
+void ofApp::setMeter(int value) {
+    
+    float mappedVal = ofMap(value, 0, maxMeterVal, 0, meters.size(), true);
+    if (mappedVal >= 6) {
+        mappedVal = 5.999;
+    }
+    
+    for (int i = 0; i < meters.size(); i++) {
+        if (i <= mappedVal) {
+            channels[meters[i]]->set(255);
+        }
+        else {
+            channels[meters[i]]->set(0);
+        }
+    }
+    
+    int notFullIndex = floor(mappedVal);
+    float amount = mappedVal - notFullIndex;
+    
+    channels[meters[notFullIndex]]->set(255 * amount);
+    
+    if (value > 10) {
+        cout << value << " : " << mappedVal << " [ ";
+        for (auto index : meters) {
+            cout << channels[index]->get() << " ";
+        }
+        cout << "]" << endl;
+    }
+    
 }
 
 void ofApp::keyPressed(int key) {

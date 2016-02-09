@@ -22,9 +22,18 @@ public:
 //    vector<shared_ptr<ofParameter<int>>> channels;
     ofParameter<bool> autoCycle;
     
-    map<string, int> lightMap;
-    map<string, shared_ptr<ofParameter<int>>> channels;
+    map<int, string> lightMap;
+    map<int, shared_ptr<ofParameter<int>>> channels;
+    
+    vector<int> meters;
     
     ofxMidiIn midiIn;
     void newMidiMessage(ofxMidiMessage& msg);
+    
+    
+    void setMeter(int value);
+    ofParameter<float> maxMeterVal;
+    ofParameter<bool> useDecay;
+    ofParameter<float> decayAmount;
+    float audioValue;
 };
