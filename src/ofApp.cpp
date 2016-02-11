@@ -2,16 +2,17 @@
 
 const int METER_CONTROL_NUMBER = 60;
 
+#include "ofxOscCenter.h"
 
 void ofApp::setup() {
-    dmx.connect("/dev/tty.usbserial-EN129270", 512);
+//    dmx.connect("/dev/tty.usbserial-EN129270", 512);
     ofBackground(0x10);
     ofSetWindowShape(300, 600);
-
+    
     paramGroup.setName("Panel");
     
-    midiIn.openPort("virtualMIDI");
-    midiIn.addListener(this);
+//    midiIn.openPort("virtualMIDI");
+//    midiIn.addListener(this);
 
     lightMap[1] = "chandelier";
 
@@ -38,16 +39,30 @@ void ofApp::setup() {
     }
     
     autoCycle.set("AutoCycle",false);
-    panel.setup(paramGroup);
+
+    shared_ptr<ofxPanel> panel = make_shared<ofxPanel>();
+    panel->setup(paramGroup);
+    panel->add(maxMeterVal.set("maxMeterVal", 127, 0, 127));
+    panel->add(useDecay.set("use decay", true));
+    panel->add(decayAmount.set("decay", 1, 0.95, 1));
+    panel->add(washCol.set("wash colour", ofColor::red, ofColor(0), ofColor(255)));
+//    panel->add(spotBrightness.set("spotBrightness", 0, 0, 255));
+
+
+    ofxPanelManager::get().addPanel(panel);
     
-    panel.add(maxMeterVal.set("maxMeterVal", 127, 0, 127));
-    panel.add(useDecay.set("use decay", true));
-    panel.add(decayAmount.set("decay", 1, 0.95, 1));
-    panel.add(washCol.set("wash colour", ofColor::red, ofColor(0), ofColor(255)));
-//    panel.add(spotBrightness.set("spotBrightness", 0, 0, 255));
+
     
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
+    
+    something.addParameter<float>("test-float100", 50.0, 0, 100);
+    something.addParameter<ofColor>("test-color", ofColor::red, ofColor(0), ofColor(255));
+//    something.parameters["test-float100"] = make_shared<ofParameter<float>>(<#_Args &&__args...#>)
+    
+    pm.setup();
+    
+    ofxOscCenter::get();
 }
 
 void ofApp::update() {
@@ -57,32 +72,35 @@ void ofApp::update() {
         setMeter(audioValue);
     }
     
-    for (auto address : washAddresses) {
-        dmx.setLevel(address, washCol.get().r);
-        dmx.setLevel(address+1, washCol.get().g);
-        dmx.setLevel(address+2, washCol.get().b);
-    }
-    
-    dmx.setLevel(50, 52);
-    dmx.setLevel(52, 86);
-//    dmx.setLevel(55, spotBrightness);
-    dmx.setLevel(56, 12);
-    dmx.setLevel(61, 15);
-    dmx.setLevel(62, 255);
-    
-    for (const auto &chan : channels) {
-        dmx.setLevel(chan.first, *chan.second.get());
-    }
-    
-    dmx.update();
+//    for (auto address : washAddresses) {
+//        dmx.setLevel(address, washCol.get().r);
+//        dmx.setLevel(address+1, washCol.get().g);
+//        dmx.setLevel(address+2, washCol.get().b);
+//    }
+//    
+//    dmx.setLevel(50, 52);
+//    dmx.setLevel(52, 86);
+////    dmx.setLevel(55, spotBrightness);
+//    dmx.setLevel(56, 12);
+//    dmx.setLevel(61, 15);
+//    dmx.setLevel(62, 255);
+//    
+//    for (const auto &chan : channels) {
+//        dmx.setLevel(chan.first, *chan.second.get());
+//    }
+//    
+//    dmx.update();
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));  
 }
 
 void ofApp::draw() {
     
-    panel.draw();
+//    panel->draw();
+
+    ofxPanelManager::get().draw();
     
+//    something.drawGui();
 }
 
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
