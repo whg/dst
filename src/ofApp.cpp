@@ -22,7 +22,13 @@ void ofApp::setup() {
         lightMap[meter] = "meter-" + ofToString(count++);
     }
     
+    washAddresses = { 27, 30 };
     
+    lightMap[55] = "spot brightness";
+    
+//    lightMap[90] = "wash-red";
+//    lightMap[91] = "wash-green";
+//    lightMap[92] = "wash-blue";
     
     stringstream ss;
     for (const auto &pair : lightMap) {
@@ -37,12 +43,11 @@ void ofApp::setup() {
     panel.add(maxMeterVal.set("maxMeterVal", 127, 0, 127));
     panel.add(useDecay.set("use decay", true));
     panel.add(decayAmount.set("decay", 1, 0.95, 1));
-
+    panel.add(washCol.set("wash colour", ofColor::red, ofColor(0), ofColor(255)));
+//    panel.add(spotBrightness.set("spotBrightness", 0, 0, 255));
     
     ofSetVerticalSync(true);
-    
-    
-    
+    ofSetFrameRate(60);
 }
 
 void ofApp::update() {
@@ -51,6 +56,19 @@ void ofApp::update() {
         audioValue *= decayAmount;
         setMeter(audioValue);
     }
+    
+    for (auto address : washAddresses) {
+        dmx.setLevel(address, washCol.get().r);
+        dmx.setLevel(address+1, washCol.get().g);
+        dmx.setLevel(address+2, washCol.get().b);
+    }
+    
+    dmx.setLevel(50, 52);
+    dmx.setLevel(52, 86);
+//    dmx.setLevel(55, spotBrightness);
+    dmx.setLevel(56, 12);
+    dmx.setLevel(61, 15);
+    dmx.setLevel(62, 255);
     
     for (const auto &chan : channels) {
         dmx.setLevel(chan.first, *chan.second.get());
@@ -90,6 +108,13 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
                 channels[lightIndex]->set(msg.velocity * 2);
             }
         }
+        if (msg.channel == 3) washCol.set(ofColor(msg.velocity * 2, washCol->g, washCol->b));
+        if (msg.channel == 4) washCol.set(ofColor(washCol->r, msg.velocity * 2, washCol->b));
+        if (msg.channel == 5) washCol.set(ofColor(washCol->r, washCol->g, msg.velocity * 2));
+        
+        if (msg.channel == 6) {
+            channels[55]->set(msg.velocity*2);
+        }
     }
     else if (msg.status == MIDI_NOTE_OFF) {
         for (const auto &pair : lightMap) {
@@ -98,6 +123,13 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
             if (msg.pitch == lightIndex) {
                 channels[lightIndex]->set(0);
             }
+        }
+        if (msg.channel == 3) washCol.set(ofColor(0, washCol->g, washCol->b));
+        if (msg.channel == 4) washCol.set(ofColor(washCol->r, 0, washCol->b));
+        if (msg.channel == 5) washCol.set(ofColor(washCol->r, washCol->g, 0));
+
+        if (msg.channel == 6) {
+            channels[55]->set(0);
         }
     }
 }

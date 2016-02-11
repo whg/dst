@@ -37,6 +37,9 @@ public:
     ofParameter<float> decayAmount;
     float audioValue;
     
+    vector<int> washAddresses;
+    ofParameter<ofColor> washCol;
     
+    ofParameter<int> spotBrightness;
     
 };
