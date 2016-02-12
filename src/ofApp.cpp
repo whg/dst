@@ -4,7 +4,7 @@ const int METER_CONTROL_NUMBER = 60;
 
 
 void ofApp::setup() {
-    dmx.connect("/dev/tty.usbserial-EN129270", 512);
+    dmx.connect("/dev/tty.usbserial-EN110089", 512);
     ofBackground(0x10);
     ofSetWindowShape(300, 600);
 
@@ -15,7 +15,7 @@ void ofApp::setup() {
 
     lightMap[1] = "chandelier";
 
-    meters = { 4, 7, 10, 13, 16, 19 };
+    meters = { 1, 4, 7, 10, 13, 16 };
     
     int count = 1;
     for (auto meter : meters) {
@@ -57,22 +57,40 @@ void ofApp::update() {
         setMeter(audioValue);
     }
     
-    for (auto address : washAddresses) {
-        dmx.setLevel(address, washCol.get().r);
-        dmx.setLevel(address+1, washCol.get().g);
-        dmx.setLevel(address+2, washCol.get().b);
+//    for (auto address : washAddresses) {
+//        dmx.setLevel(address, washCol.get().r);
+//        dmx.setLevel(address+1, washCol.get().g);
+//        dmx.setLevel(address+2, washCol.get().b);
+//    }
+//    
+//    dmx.setLevel(50, 52);
+//    dmx.setLevel(52, 86);
+////    dmx.setLevel(55, spotBrightness);
+//    dmx.setLevel(56, 12);
+//    dmx.setLevel(61, 15);
+//    dmx.setLevel(62, 255);
+//
+
+    vector<ofColor> cols = { ofColor::green, ofColor::yellow, ofColor::red };
+    int i = 0, p = 0;
+    for (auto meterIndex : meters) {
+        dmx.setLevel(meterIndex, cols[p].r * (channels[meterIndex]->get()/255.0));
+        dmx.setLevel(meterIndex+1, cols[p].g * (channels[meterIndex]->get()/255.0));
+        dmx.setLevel(meterIndex+2, cols[p].b * (channels[meterIndex]->get()/255.0));
+        
+        dmx.setLevel(meterIndex+18, cols[p].r * (channels[meterIndex]->get()/255.0));
+        dmx.setLevel(meterIndex+19, cols[p].g * (channels[meterIndex]->get()/255.0));
+        dmx.setLevel(meterIndex+20, cols[p].b * (channels[meterIndex]->get()/255.0));
+        
+        i++;
+        if (i % 2 == 0) {
+            p++;
+        }
     }
     
-    dmx.setLevel(50, 52);
-    dmx.setLevel(52, 86);
-//    dmx.setLevel(55, spotBrightness);
-    dmx.setLevel(56, 12);
-    dmx.setLevel(61, 15);
-    dmx.setLevel(62, 255);
-    
-    for (const auto &chan : channels) {
-        dmx.setLevel(chan.first, *chan.second.get());
-    }
+//    for (const auto &chan : channels) {
+//        dmx.setLevel(chan.first, *chan.second.get());
+//    }
     
     dmx.update();
     
