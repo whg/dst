@@ -8,62 +8,7 @@
 #include "ofxPanelManager.h"
 #include "ofxParameterMapper.h"
 
-class Something {
-public:
-
-    Something(): gui(nullptr), guiDirty(true) {
-        
-    }
-    
-    void buildPanel() {
-        
-        if (gui == nullptr) {
-            gui = make_shared<ofxPanel>();
-            gui->setup();
-        }
-    
-        gui->clear();
-        
-        for (auto &pair : parameters) {
-            auto param = pair.second;
-            auto type = param->type();
-//            cout << type << endl;
-            
-            if (type == "11ofParameterIiE") {
-                gui->add(param->cast<int>());
-            }
-            else if (type == "11ofParameterIfE") {
-                gui->add(param->cast<float>());
-            }
-            else if (type == "11ofParameterI8ofColor_IhEE") {
-                gui->add(param->cast<ofColor>());
-            }
-
-        }
-        guiDirty = false;
-    }
-    
-    shared_ptr<ofxPanel> gui;
-    
-    template<typename T>
-    void addParameter(string name, T initial, T min, T max) {
-        parameters[name] = make_shared<ofParameter<T>>(name, initial, min, max);
-        guiDirty = true;
-    }
-    
-    void drawGui() {
-        if (guiDirty) {
-            buildPanel();
-        }
-        gui->draw();
-    }
-    
-    
-    
-    map<string, shared_ptr<ofAbstractParameter>> parameters;
-    bool guiDirty;
-};
-
+#include "Fixture.h"
 
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
@@ -106,6 +51,6 @@ public:
     ofParameter<int> spotBrightness;
     
     
-    Something something;
-    ofxParameterMapper pm;
+    shared_ptr<Fixture> something;
+//    ofxParameterMapper pm;
 };

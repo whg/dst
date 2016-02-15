@@ -4,15 +4,17 @@ const int METER_CONTROL_NUMBER = 60;
 
 #include "ofxOscCenter.h"
 
+#include "ofxDmxCenter.h"
+
 void ofApp::setup() {
 //    dmx.connect("/dev/tty.usbserial-EN129270", 512);
     ofBackground(0x10);
-    ofSetWindowShape(300, 600);
+    ofSetWindowShape(600, 600);
     
     paramGroup.setName("Panel");
     
-//    midiIn.openPort("virtualMIDI");
-//    midiIn.addListener(this);
+    midiIn.openPort("MPK mini");
+    midiIn.addListener(this);
 
     lightMap[1] = "chandelier";
 
@@ -20,7 +22,7 @@ void ofApp::setup() {
     
     int count = 1;
     for (auto meter : meters) {
-        lightMap[meter] = "meter-" + ofToString(count++);
+        lightMap[meter] = "meter_" + ofToString(count++);
     }
     
     washAddresses = { 27, 30 };
@@ -33,7 +35,7 @@ void ofApp::setup() {
     
     stringstream ss;
     for (const auto &pair : lightMap) {
-        auto p = shared_ptr<ofParameter<int> >(new ofParameter<int>(ofToString(pair.first) + " : " + pair.second , 0, 0, 255));
+        auto p = shared_ptr<ofParameter<int> >(new ofParameter<int>(pair.second , 50, 0, 255));
         paramGroup.add(*(p.get()));
         channels[pair.first] = p;
     }
@@ -43,26 +45,43 @@ void ofApp::setup() {
     shared_ptr<ofxPanel> panel = make_shared<ofxPanel>();
     panel->setup(paramGroup);
     panel->add(maxMeterVal.set("maxMeterVal", 127, 0, 127));
-    panel->add(useDecay.set("use decay", true));
+    panel->add(useDecay.set("use decay", false));
     panel->add(decayAmount.set("decay", 1, 0.95, 1));
     panel->add(washCol.set("wash colour", ofColor::red, ofColor(0), ofColor(255)));
 //    panel->add(spotBrightness.set("spotBrightness", 0, 0, 255));
 
 
-    ofxPanelManager::get().addPanel(panel);
+    ofxPanelManager::get().addPanel(panel, true);
     
 
     
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
-    
-    something.addParameter<float>("test-float100", 50.0, 0, 100);
-    something.addParameter<ofColor>("test-color", ofColor::red, ofColor(0), ofColor(255));
-//    something.parameters["test-float100"] = make_shared<ofParameter<float>>(<#_Args &&__args...#>)
-    
-    pm.setup();
+
+    for (int i = 0; i < 3; i++) {
+        auto something = make_shared<Fixture>("testfix");
+        something->addParameter("test-color", 1, ofColor::red, ofColor(0), ofColor(255));
+    //    something.parameters["test-float100"] = make_shared<ofParameter<float>>(<#_Args &&__args...#>)
+        
+
+        ofxDmxCenter::get().addFixture(something);
+        ofxPanelManager::get().addPanel(something->getPanel(), true);
+    }
+//    auto something2 = make_shared<Fixture>("testfix");
+//    something2->addParameter("test-color", 1, ofColor::red, ofColor(0), ofColor(255));
+//    //    something.parameters["test-float100"] = make_shared<ofParameter<float>>(<#_Args &&__args...#>)
+//    
+//    ofxPanelManager::get().addPanel(something2->getPanel(), true);
+//    ofxDmxCenter::get().addFixture(something2);
+
+//    }
+    ofxParameterMapper::get();
     
     ofxOscCenter::get();
+    
+    ofxDmxCenter::get().assignAddresses();
+    
+    ofxDmxCenter::get().openFixturesGui();
 }
 
 void ofApp::update() {
@@ -119,6 +138,9 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
         }
     }
     else if (msg.status == MIDI_NOTE_ON) {
+    
+        cout << "note on!" << endl;
+    
         for (const auto &pair : lightMap) {
             auto lightIndex = pair.first;
             auto lightName = pair.second;
