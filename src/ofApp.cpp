@@ -10,12 +10,13 @@ void ofApp::setup() {
 
     paramGroup.setName("Panel");
     
-    midiIn.openPort("virtualMIDI");
+    ofxMidiIn::listPorts();
+    midiIn.openPort("Express  128b Port 7");
     midiIn.addListener(this);
 
     lightMap[1] = "chandelier";
 
-    meters = { 1, 4, 7, 10, 13, 16 };
+    meters = { 4, 7, 10, 13, 16 };
     
     int count = 1;
     for (auto meter : meters) {
@@ -52,10 +53,10 @@ void ofApp::setup() {
 
 void ofApp::update() {
     
-    if (useDecay) {
-        audioValue *= decayAmount;
-        setMeter(audioValue);
-    }
+//    if (useDecay) {
+//        audioValue *= decayAmount;
+//        setMeter(audioValue);
+//    }
     
 //    for (auto address : washAddresses) {
 //        dmx.setLevel(address, washCol.get().r);
@@ -70,27 +71,27 @@ void ofApp::update() {
 //    dmx.setLevel(61, 15);
 //    dmx.setLevel(62, 255);
 //
-
-    vector<ofColor> cols = { ofColor::green, ofColor::yellow, ofColor::red };
-    int i = 0, p = 0;
-    for (auto meterIndex : meters) {
-        dmx.setLevel(meterIndex, cols[p].r * (channels[meterIndex]->get()/255.0));
-        dmx.setLevel(meterIndex+1, cols[p].g * (channels[meterIndex]->get()/255.0));
-        dmx.setLevel(meterIndex+2, cols[p].b * (channels[meterIndex]->get()/255.0));
-        
-        dmx.setLevel(meterIndex+18, cols[p].r * (channels[meterIndex]->get()/255.0));
-        dmx.setLevel(meterIndex+19, cols[p].g * (channels[meterIndex]->get()/255.0));
-        dmx.setLevel(meterIndex+20, cols[p].b * (channels[meterIndex]->get()/255.0));
-        
-        i++;
-        if (i % 2 == 0) {
-            p++;
-        }
-    }
-    
-//    for (const auto &chan : channels) {
-//        dmx.setLevel(chan.first, *chan.second.get());
+//
+//    vector<ofColor> cols = { ofColor::green, ofColor::yellow, ofColor::red };
+//    int i = 0, p = 0;
+//    for (auto meterIndex : meters) {
+//        dmx.setLevel(meterIndex, cols[p].r * (channels[meterIndex]->get()/255.0));
+//        dmx.setLevel(meterIndex+1, cols[p].g * (channels[meterIndex]->get()/255.0));
+//        dmx.setLevel(meterIndex+2, cols[p].b * (channels[meterIndex]->get()/255.0));
+//        
+//        dmx.setLevel(meterIndex+18, cols[p].r * (channels[meterIndex]->get()/255.0));
+//        dmx.setLevel(meterIndex+19, cols[p].g * (channels[meterIndex]->get()/255.0));
+//        dmx.setLevel(meterIndex+20, cols[p].b * (channels[meterIndex]->get()/255.0));
+//        
+//        i++;
+//        if (i % 2 == 0) {
+//            p++;
+//        }
 //    }
+    
+    for (const auto &chan : channels) {
+        dmx.setLevel(chan.first, *chan.second.get());
+    }
     
     dmx.update();
     
@@ -104,6 +105,8 @@ void ofApp::draw() {
 }
 
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
+
+    if (msg.channel != 1) return;
     
     if (msg.status == MIDI_CONTROL_CHANGE) {
         if (msg.control == METER_CONTROL_NUMBER) {
@@ -119,36 +122,42 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
         }
     }
     else if (msg.status == MIDI_NOTE_ON) {
-        for (const auto &pair : lightMap) {
-            auto lightIndex = pair.first;
-            auto lightName = pair.second;
-            if (msg.pitch == lightIndex) {
-                channels[lightIndex]->set(msg.velocity * 2);
-            }
-        }
-        if (msg.channel == 3) washCol.set(ofColor(msg.velocity * 2, washCol->g, washCol->b));
-        if (msg.channel == 4) washCol.set(ofColor(washCol->r, msg.velocity * 2, washCol->b));
-        if (msg.channel == 5) washCol.set(ofColor(washCol->r, washCol->g, msg.velocity * 2));
-        
-        if (msg.channel == 6) {
-            channels[55]->set(msg.velocity*2);
-        }
+    
+        channels[1]->set(255);
+    
+//        for (const auto &pair : lightMap) {
+//            auto lightIndex = pair.first;
+//            auto lightName = pair.second;
+//            if (msg.pitch == lightIndex) {
+//                channels[lightIndex]->set(msg.velocity * 2);
+//            }
+//        }
+//        if (msg.channel == 3) washCol.set(ofColor(msg.velocity * 2, washCol->g, washCol->b));
+//        if (msg.channel == 4) washCol.set(ofColor(washCol->r, msg.velocity * 2, washCol->b));
+//        if (msg.channel == 5) washCol.set(ofColor(washCol->r, washCol->g, msg.velocity * 2));
+//        
+//        if (msg.channel == 6) {
+//            channels[55]->set(msg.velocity*2);
+//        }
     }
     else if (msg.status == MIDI_NOTE_OFF) {
-        for (const auto &pair : lightMap) {
-            auto lightIndex = pair.first;
-            auto lightName = pair.second;
-            if (msg.pitch == lightIndex) {
-                channels[lightIndex]->set(0);
-            }
-        }
-        if (msg.channel == 3) washCol.set(ofColor(0, washCol->g, washCol->b));
-        if (msg.channel == 4) washCol.set(ofColor(washCol->r, 0, washCol->b));
-        if (msg.channel == 5) washCol.set(ofColor(washCol->r, washCol->g, 0));
-
-        if (msg.channel == 6) {
-            channels[55]->set(0);
-        }
+    
+        channels[1]->set(0);
+    
+//        for (const auto &pair : lightMap) {
+//            auto lightIndex = pair.first;
+//            auto lightName = pair.second;
+//            if (msg.pitch == lightIndex) {
+//                channels[lightIndex]->set(0);
+//            }
+//        }
+//        if (msg.channel == 3) washCol.set(ofColor(0, washCol->g, washCol->b));
+//        if (msg.channel == 4) washCol.set(ofColor(washCol->r, 0, washCol->b));
+//        if (msg.channel == 5) washCol.set(ofColor(washCol->r, washCol->g, 0));
+//
+//        if (msg.channel == 6) {
+//            channels[55]->set(0);
+//        }
     }
 }
 
