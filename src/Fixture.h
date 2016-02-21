@@ -8,7 +8,7 @@ class Fixture  {
 public:
     Fixture(string name, int startAddress=0);
     
-    void update() {}
+    virtual void update() {}
     
     void setDmxStartAddress(int a) { mDmxStartAddress = a; }
     void setDmxUniverse(string u) { mDmxUniverse = u; }
@@ -24,10 +24,10 @@ public:
     virtual shared_ptr<ofxPanel> getPanel();
     virtual void drawGui();
     
+    
+    
     template<typename T>
-    void addParameter(string name, int address, T initial, T min, T max) {
-        
-        auto param = make_shared<ofParameter<T>>(name, initial, min, max);
+    void addParameter(shared_ptr<ofParameter<T>> param, int address) {
         
         mParameters[address] = param;
         mPanel->add(*param.get());
@@ -42,6 +42,31 @@ public:
         else if (type == typeid(float).name()) {
             mNumChannels+= 1;
         }
+        else if (type == typeid(unsigned char).name()) {
+            mNumChannels+= 1;
+        }
+        
+    }
+    
+    template<typename T>
+    void addParameter(string name, int address, T initial, T min, T max) {
+        
+        auto param = make_shared<ofParameter<T>>(name, initial, min, max);
+        addParameter(param, address);
+        
+//        mParameters[address] = param;
+//        mPanel->add(*param.get());
+//        
+//        auto type = typeid(T).name();
+//        if (type == typeid(ofColor).name()) {
+//            mNumChannels+= 3;
+//        }
+//        else if (type == typeid(int).name()) {
+//            mNumChannels+= 1;
+//        }
+//        else if (type == typeid(float).name()) {
+//            mNumChannels+= 1;
+//        }
         
     }
 
@@ -68,8 +93,23 @@ public:
     Colorado(string name="Colorado", int startAddress=0);
 };
 
+class FadoColumn : public Fixture {
+public:
+    FadoColumn(string name="FadoCol", int startAddress=0);
+    
+    void update();
+    
+protected:
+    ofParameter<float> mAudioInput, mMaxMeterVal;
+    vector<shared_ptr<ofParameter<int>>> mMeters;
+    
+};
 
-
+class AnglepoiseSet : public FadoColumn {
+public:
+    AnglepoiseSet(string name="AnglepoiseSet", int startAddress=0);
+    
+};
 
 
 

@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7246CA811C7A168D009B2A6B /* ofxDmxCenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7246CA761C7A168D009B2A6B /* ofxDmxCenter.cpp */; };
+		7246CA821C7A168D009B2A6B /* ofxMidiMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7246CA791C7A168D009B2A6B /* ofxMidiMapper.cpp */; };
+		7246CA831C7A168D009B2A6B /* ofxParameterMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7246CA7B1C7A168D009B2A6B /* ofxParameterMapper.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
 		EE29F9061C6FDAE2008726E1 /* Fixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE29F9041C6FDAE2008726E1 /* Fixture.cpp */; };
-		EE29F9091C70E729008726E1 /* ofxDmxCenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE29F9071C70E729008726E1 /* ofxDmxCenter.cpp */; };
 		EE8588BF1C69100900350C7A /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE85889C1C69100900350C7A /* RtMidi.cpp */; };
 		EE8588C01C69100900350C7A /* ofxRtMidiIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE8588A01C69100900350C7A /* ofxRtMidiIn.cpp */; };
 		EE8588C11C69100900350C7A /* ofxRtMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE8588A21C69100900350C7A /* ofxRtMidiOut.cpp */; };
@@ -21,7 +23,6 @@
 		EE8588CA1C69100900350C7A /* ofxMidiMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE8588B61C69100900350C7A /* ofxMidiMessage.cpp */; };
 		EE8588CB1C69100900350C7A /* ofxMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE8588B81C69100900350C7A /* ofxMidiOut.cpp */; };
 		EE8588D01C69101A00350C7A /* ofxDmx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE8588CE1C69101A00350C7A /* ofxDmx.cpp */; };
-		EE8588E11C6910B800350C7A /* ofxMidiMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE8588DB1C6910B800350C7A /* ofxMidiMapper.cpp */; };
 		EE8588E31C6915D500350C7A /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE8588E21C6915D500350C7A /* CoreMIDI.framework */; };
 		EEB67DCC1C6CC4DA000903D5 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DBB1C6CC4DA000903D5 /* ofxBaseGui.cpp */; };
 		EEB67DCD1C6CC4DA000903D5 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DBD1C6CC4DA000903D5 /* ofxButton.cpp */; };
@@ -32,7 +33,6 @@
 		EEB67DD21C6CC4DA000903D5 /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DC81C6CC4DA000903D5 /* ofxSliderGroup.cpp */; };
 		EEB67DD31C6CC4DA000903D5 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DCA1C6CC4DA000903D5 /* ofxToggle.cpp */; };
 		EEB67DD71C6CCBDE000903D5 /* ofxPanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DD51C6CCBDE000903D5 /* ofxPanelManager.cpp */; };
-		EEB67DDA1C6CEF05000903D5 /* ofxParameterMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DD81C6CEF05000903D5 /* ofxParameterMapper.cpp */; };
 		EEB67E071C6D0C86000903D5 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DE11C6D0C86000903D5 /* IpEndpointName.cpp */; };
 		EEB67E081C6D0C86000903D5 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DE61C6D0C86000903D5 /* NetworkingUtils.cpp */; };
 		EEB67E091C6D0C86000903D5 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB67DE71C6D0C86000903D5 /* UdpSocket.cpp */; };
@@ -78,6 +78,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7246CA711C7A168D009B2A6B /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
+		7246CA731C7A168D009B2A6B /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
+		7246CA741C7A168D009B2A6B /* Kinect2Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kinect2Wrapper.h; sourceTree = "<group>"; };
+		7246CA751C7A168D009B2A6B /* ofxBaseHasCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseHasCanvas.h; sourceTree = "<group>"; };
+		7246CA761C7A168D009B2A6B /* ofxDmxCenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDmxCenter.cpp; sourceTree = "<group>"; };
+		7246CA771C7A168D009B2A6B /* ofxDmxCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDmxCenter.h; sourceTree = "<group>"; };
+		7246CA781C7A168D009B2A6B /* ofxImageMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxImageMask.h; sourceTree = "<group>"; };
+		7246CA791C7A168D009B2A6B /* ofxMidiMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiMapper.cpp; sourceTree = "<group>"; };
+		7246CA7A1C7A168D009B2A6B /* ofxMidiMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiMapper.h; sourceTree = "<group>"; };
+		7246CA7B1C7A168D009B2A6B /* ofxParameterMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxParameterMapper.cpp; sourceTree = "<group>"; };
+		7246CA7C1C7A168D009B2A6B /* ofxParameterMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxParameterMapper.h; sourceTree = "<group>"; };
+		7246CA7D1C7A168D009B2A6B /* ofxRadioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRadioGroup.h; sourceTree = "<group>"; };
+		7246CA7E1C7A168D009B2A6B /* ofxTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTools.h; sourceTree = "<group>"; };
+		7246CA7F1C7A168D009B2A6B /* ofxWarper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxWarper.h; sourceTree = "<group>"; };
+		7246CA801C7A168D009B2A6B /* timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timing.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* desperados studio testDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "desperados studio testDebug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
@@ -88,8 +103,6 @@
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		EE29F9041C6FDAE2008726E1 /* Fixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fixture.cpp; sourceTree = "<group>"; };
 		EE29F9051C6FDAE2008726E1 /* Fixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fixture.h; sourceTree = "<group>"; };
-		EE29F9071C70E729008726E1 /* ofxDmxCenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDmxCenter.cpp; sourceTree = "<group>"; };
-		EE29F9081C70E729008726E1 /* ofxDmxCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDmxCenter.h; sourceTree = "<group>"; };
 		EE85889B1C69100900350C7A /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		EE85889C1C69100900350C7A /* RtMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RtMidi.cpp; sourceTree = "<group>"; };
 		EE85889D1C69100900350C7A /* RtMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtMidi.h; sourceTree = "<group>"; };
@@ -111,17 +124,6 @@
 		EE8588BA1C69100900350C7A /* ofxMidiTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiTypes.h; sourceTree = "<group>"; };
 		EE8588CE1C69101A00350C7A /* ofxDmx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDmx.cpp; sourceTree = "<group>"; };
 		EE8588CF1C69101A00350C7A /* ofxDmx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDmx.h; sourceTree = "<group>"; };
-		EE8588D51C6910B800350C7A /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
-		EE8588D71C6910B800350C7A /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
-		EE8588D81C6910B800350C7A /* Kinect2Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kinect2Wrapper.h; sourceTree = "<group>"; };
-		EE8588D91C6910B800350C7A /* ofxBaseHasCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseHasCanvas.h; sourceTree = "<group>"; };
-		EE8588DA1C6910B800350C7A /* ofxImageMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxImageMask.h; sourceTree = "<group>"; };
-		EE8588DB1C6910B800350C7A /* ofxMidiMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxMidiMapper.cpp; sourceTree = "<group>"; };
-		EE8588DC1C6910B800350C7A /* ofxMidiMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMidiMapper.h; sourceTree = "<group>"; };
-		EE8588DD1C6910B800350C7A /* ofxRadioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRadioGroup.h; sourceTree = "<group>"; };
-		EE8588DE1C6910B800350C7A /* ofxTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTools.h; sourceTree = "<group>"; };
-		EE8588DF1C6910B800350C7A /* ofxWarper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxWarper.h; sourceTree = "<group>"; };
-		EE8588E01C6910B800350C7A /* timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timing.h; sourceTree = "<group>"; };
 		EE8588E21C6915D500350C7A /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		EEB67DBB1C6CC4DA000903D5 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
 		EEB67DBC1C6CC4DA000903D5 /* ofxBaseGui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
@@ -142,8 +144,6 @@
 		EEB67DCB1C6CC4DA000903D5 /* ofxToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
 		EEB67DD51C6CCBDE000903D5 /* ofxPanelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPanelManager.cpp; sourceTree = "<group>"; };
 		EEB67DD61C6CCBDE000903D5 /* ofxPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPanelManager.h; sourceTree = "<group>"; };
-		EEB67DD81C6CEF05000903D5 /* ofxParameterMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxParameterMapper.cpp; sourceTree = "<group>"; };
-		EEB67DD91C6CEF05000903D5 /* ofxParameterMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxParameterMapper.h; sourceTree = "<group>"; };
 		EEB67DDC1C6D0C86000903D5 /* addon_config.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addon_config.mk; sourceTree = "<group>"; };
 		EEB67DE11C6D0C86000903D5 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		EEB67DE21C6D0C86000903D5 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
@@ -201,9 +201,41 @@
 			name = local_addons;
 			sourceTree = "<group>";
 		};
+		7246CA701C7A168D009B2A6B /* whelpersg */ = {
+			isa = PBXGroup;
+			children = (
+				7246CA711C7A168D009B2A6B /* data.h */,
+				7246CA721C7A168D009B2A6B /* json */,
+				7246CA741C7A168D009B2A6B /* Kinect2Wrapper.h */,
+				7246CA751C7A168D009B2A6B /* ofxBaseHasCanvas.h */,
+				7246CA761C7A168D009B2A6B /* ofxDmxCenter.cpp */,
+				7246CA771C7A168D009B2A6B /* ofxDmxCenter.h */,
+				7246CA781C7A168D009B2A6B /* ofxImageMask.h */,
+				7246CA791C7A168D009B2A6B /* ofxMidiMapper.cpp */,
+				7246CA7A1C7A168D009B2A6B /* ofxMidiMapper.h */,
+				7246CA7B1C7A168D009B2A6B /* ofxParameterMapper.cpp */,
+				7246CA7C1C7A168D009B2A6B /* ofxParameterMapper.h */,
+				7246CA7D1C7A168D009B2A6B /* ofxRadioGroup.h */,
+				7246CA7E1C7A168D009B2A6B /* ofxTools.h */,
+				7246CA7F1C7A168D009B2A6B /* ofxWarper.h */,
+				7246CA801C7A168D009B2A6B /* timing.h */,
+			);
+			name = whelpersg;
+			path = ../../../../include/whelpersg;
+			sourceTree = "<group>";
+		};
+		7246CA721C7A168D009B2A6B /* json */ = {
+			isa = PBXGroup;
+			children = (
+				7246CA731C7A168D009B2A6B /* json.hpp */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				EE8588E21C6915D500350C7A /* CoreMIDI.framework */,
 				EEB67DDB1C6D0C86000903D5 /* ofxOsc */,
 				EEB67DB91C6CC4DA000903D5 /* ofxGuiMappable */,
 				EE8588D11C69101F00350C7A /* ofDmx */,
@@ -223,8 +255,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
-				EE8588E21C6915D500350C7A /* CoreMIDI.framework */,
-				EE8588D31C6910B800350C7A /* include */,
+				7246CA701C7A168D009B2A6B /* whelpersg */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -332,45 +363,6 @@
 				EE8588CD1C69101A00350C7A /* src */,
 			);
 			name = ofDmx;
-			sourceTree = "<group>";
-		};
-		EE8588D31C6910B800350C7A /* include */ = {
-			isa = PBXGroup;
-			children = (
-				EE8588D41C6910B800350C7A /* whelpersg */,
-			);
-			name = include;
-			path = ../../../../../include;
-			sourceTree = "<group>";
-		};
-		EE8588D41C6910B800350C7A /* whelpersg */ = {
-			isa = PBXGroup;
-			children = (
-				EE8588D51C6910B800350C7A /* data.h */,
-				EE8588D61C6910B800350C7A /* json */,
-				EE8588D81C6910B800350C7A /* Kinect2Wrapper.h */,
-				EE8588D91C6910B800350C7A /* ofxBaseHasCanvas.h */,
-				EE8588DA1C6910B800350C7A /* ofxImageMask.h */,
-				EE8588DB1C6910B800350C7A /* ofxMidiMapper.cpp */,
-				EE8588DC1C6910B800350C7A /* ofxMidiMapper.h */,
-				EE8588DD1C6910B800350C7A /* ofxRadioGroup.h */,
-				EE8588DE1C6910B800350C7A /* ofxTools.h */,
-				EE8588DF1C6910B800350C7A /* ofxWarper.h */,
-				EE8588E01C6910B800350C7A /* timing.h */,
-				EEB67DD81C6CEF05000903D5 /* ofxParameterMapper.cpp */,
-				EEB67DD91C6CEF05000903D5 /* ofxParameterMapper.h */,
-				EE29F9071C70E729008726E1 /* ofxDmxCenter.cpp */,
-				EE29F9081C70E729008726E1 /* ofxDmxCenter.h */,
-			);
-			path = whelpersg;
-			sourceTree = "<group>";
-		};
-		EE8588D61C6910B800350C7A /* json */ = {
-			isa = PBXGroup;
-			children = (
-				EE8588D71C6910B800350C7A /* json.hpp */,
-			);
-			path = json;
 			sourceTree = "<group>";
 		};
 		EEB67DB91C6CC4DA000903D5 /* ofxGuiMappable */ = {
@@ -594,10 +586,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7246CA831C7A168D009B2A6B /* ofxParameterMapper.cpp in Sources */,
 				EEB67E141C6D0C86000903D5 /* ofxOscSender.cpp in Sources */,
 				EEB67E0F1C6D0C86000903D5 /* OscTypes.cpp in Sources */,
 				EEB67E131C6D0C86000903D5 /* ofxOscReceiver.cpp in Sources */,
-				EEB67DDA1C6CEF05000903D5 /* ofxParameterMapper.cpp in Sources */,
 				EE8588C91C69100900350C7A /* ofxMidiIn.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				EEB67E091C6D0C86000903D5 /* UdpSocket.cpp in Sources */,
@@ -605,7 +597,6 @@
 				EE8588C71C69100900350C7A /* ofxBaseMidi.cpp in Sources */,
 				EEB67DCE1C6CC4DA000903D5 /* ofxGuiGroup.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				EE8588E11C6910B800350C7A /* ofxMidiMapper.cpp in Sources */,
 				EE8588C81C69100900350C7A /* ofxMidi.cpp in Sources */,
 				EEB67DD21C6CC4DA000903D5 /* ofxSliderGroup.cpp in Sources */,
 				EEB67E101C6D0C86000903D5 /* ofxOscBundle.cpp in Sources */,
@@ -626,11 +617,12 @@
 				EEB67DD71C6CCBDE000903D5 /* ofxPanelManager.cpp in Sources */,
 				EEB67DD31C6CC4DA000903D5 /* ofxToggle.cpp in Sources */,
 				EEB67E081C6D0C86000903D5 /* NetworkingUtils.cpp in Sources */,
-				EE29F9091C70E729008726E1 /* ofxDmxCenter.cpp in Sources */,
 				EEB67E111C6D0C86000903D5 /* ofxOscMessage.cpp in Sources */,
 				EEB67DCC1C6CC4DA000903D5 /* ofxBaseGui.cpp in Sources */,
 				EEB67E0D1C6D0C86000903D5 /* OscPrintReceivedElements.cpp in Sources */,
 				EE8588C11C69100900350C7A /* ofxRtMidiOut.cpp in Sources */,
+				7246CA811C7A168D009B2A6B /* ofxDmxCenter.cpp in Sources */,
+				7246CA821C7A168D009B2A6B /* ofxMidiMapper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +728,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "desperados studio testDebug";
+				USER_HEADER_SEARCH_PATHS = /Users/itg/Code/include/whelpersg;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -764,6 +757,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "desperados studio test";
+				USER_HEADER_SEARCH_PATHS = /Users/itg/Code/include/whelpersg;
 				WRAPPER_EXTENSION = app;
 				baseConfigurationReference = E4EB6923138AFD0F00A09F29;
 			};
