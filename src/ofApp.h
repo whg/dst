@@ -5,6 +5,12 @@
 #include "ofxGui.h"
 #include "ofxMidi.h"
 
+#include "ofxPanelManager.h"
+#include "ofxParameterMapper.h"
+
+#include "Fixture.h"
+
+
 class ofApp : public ofBaseApp, public ofxMidiListener {
 public:
     void setup();
@@ -16,7 +22,9 @@ public:
     ofxDmx dmx;
     int level;
     
-    ofxPanel panel;
+//    shared_ptr<ofxPanel> panel;
+    
+    
     ofParameterGroup paramGroup;
     
 //    vector<shared_ptr<ofParameter<int>>> channels;
@@ -42,4 +50,9 @@ public:
     
     ofParameter<int> spotBrightness;
     
+    
+    shared_ptr<Fixture> something;
+    
+    
+//    ofxParameterMapper pm;
 };

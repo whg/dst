@@ -2,4 +2,260 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../addons/ofxGuiMappable/src/ofxPanel.cpp"
+            timestampString = "477245027.634467"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "ofxPanel::setValue(float mx, float my, bool bCheck)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../include/whelpersg/ofxParameterMapper.cpp"
+            timestampString = "477696247.694801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "ofxParameterMapper::Sources::updateOscList(ofxOscCenterCommandArgs &amp;args)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../include/whelpersg/ofxParameterMapper.cpp"
+            timestampString = "477696247.694801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
+            landmarkName = "ofxParameterMapper::InputLimits::InputLimits(ofxBaseGui &amp;guiElem, string path, string commandString)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../libs/openFrameworks/utils/ofXml.cpp"
+            timestampString = "477150649.492109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "ofXml::serialize(const ofAbstractParameter &amp; parameter)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../libs/openFrameworks/utils/ofXml.cpp"
+            timestampString = "477151759.799272"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "ofXml::deserialize(ofAbstractParameter &amp; parameter)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../addons/ofxGuiMappable/src/ofxSlider.cpp"
+            timestampString = "477151747.445019"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "mousePressed(ofMouseEventArgs &amp; args)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;signed char&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.554734"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;unsigned char&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.555027"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;short&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.555279"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;unsigned short&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.555514"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;int&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.555751"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;unsigned int&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.555974"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;long long&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.556193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;unsigned long long&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.556403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;float&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.556627"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ofxSlider&lt;double&gt;::mousePressed(ofMouseEventArgs&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  urlString = "file:///Users/whg/Code/of/of_v0.9.0_osx_release/addons/ofxGuiMappable/src/ofxSlider.cpp"
+                  timestampString = "477152261.556851"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "110">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../include/whelpersg/ofxDmxCenter.cpp"
+            timestampString = "477245686.989474"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "ofxDmxCenter::assignAddresses()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
