@@ -31,7 +31,7 @@ Fixture::Fixture(string name, int startAddress): mName(getUniqueName(name)), mFi
 shared_ptr<ofxPanel> Fixture::getPanel() {
     if (mPanel == nullptr) {
         mPanel = make_shared<ofxPanel>();
-        mPanel->setup(mName, "fixture-settings.xml");
+        mPanel->setup(mName, mName + ".xml");
     }
     return mPanel;
 }
@@ -50,6 +50,7 @@ Colorado::Colorado(string name, int startAddress): Fixture(name, startAddress) {
 
 FadoColumn::FadoColumn(string name, int startAddress): Fixture(name, startAddress) {
     
+    mPanel->add(mDoUpdate.set("update", true));
     mPanel->add(mAudioInput.set("audio input", 0, 0, 1));
     mPanel->add(mMaxMeterVal.set("max val", 1, 0, 1));
 
@@ -66,26 +67,28 @@ FadoColumn::FadoColumn(string name, int startAddress): Fixture(name, startAddres
 
 void FadoColumn::update() {
     
-    float mappedVal = ofMap(mAudioInput, 0, mMaxMeterVal, 0, mMeters.size(), true);
-    if (mappedVal >= mMeters.size()) {
-        mappedVal = mMeters.size() - 0.001;
-    }
+    if (mDoUpdate) {
     
-    
-    for (int i = 0; i < mMeters.size(); i++) {
-        if (i <= mappedVal) {
-            mMeters[i]->set(255);
+        float mappedVal = ofMap(mAudioInput, 0, mMaxMeterVal, 0, mMeters.size(), true);
+        if (mappedVal >= mMeters.size()) {
+            mappedVal = mMeters.size() - 0.001;
         }
-        else {
-            mMeters[i]->set(0);
+        
+        
+        for (int i = 0; i < mMeters.size(); i++) {
+            if (i <= mappedVal) {
+                mMeters[i]->set(255);
+            }
+            else {
+                mMeters[i]->set(0);
+            }
         }
+        
+        int notFullIndex = floor(mappedVal);
+        float amount = mappedVal - notFullIndex;
+        
+        mMeters[notFullIndex]->set(255 * amount);
     }
-    
-    int notFullIndex = floor(mappedVal);
-    float amount = mappedVal - notFullIndex;
-    
-    mMeters[notFullIndex]->set(255 * amount);
-    
     
 }
 

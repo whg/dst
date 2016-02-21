@@ -25,7 +25,6 @@ public:
     virtual void drawGui();
     
     
-    
     template<typename T>
     void addParameter(shared_ptr<ofParameter<T>> param, int address) {
         
@@ -53,20 +52,6 @@ public:
         
         auto param = make_shared<ofParameter<T>>(name, initial, min, max);
         addParameter(param, address);
-        
-//        mParameters[address] = param;
-//        mPanel->add(*param.get());
-//        
-//        auto type = typeid(T).name();
-//        if (type == typeid(ofColor).name()) {
-//            mNumChannels+= 3;
-//        }
-//        else if (type == typeid(int).name()) {
-//            mNumChannels+= 1;
-//        }
-//        else if (type == typeid(float).name()) {
-//            mNumChannels+= 1;
-//        }
         
     }
 
@@ -100,6 +85,7 @@ public:
     void update();
     
 protected:
+    ofParameter<bool> mDoUpdate;
     ofParameter<float> mAudioInput, mMaxMeterVal;
     vector<shared_ptr<ofParameter<int>>> mMeters;
     

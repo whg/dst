@@ -22,8 +22,8 @@ void ofApp::setup() {
     ofSetFrameRate(60);
 
     
-    ofxDmxCenter::get().addFixture(make_shared<FadoColumn>());
-    ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
+    for (int i =0; i < 10; i++) ofxDmxCenter::get().addFixture(make_shared<FadoColumn>());
+    for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
 
     
     ofxParameterMapper::get();
@@ -54,6 +54,11 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
     
     KEY('d', ofxDmxCenter::get().openFixturesGui());
+    
+    KEY('s', ofxDmxCenter::get().saveFixtureData());
+    KEY('l', ofxDmxCenter::get().loadFixtureData());
+    
+    KEY('f', ofToggleFullscreen());
 }
 
 void ofApp::keyReleased(int key) {
