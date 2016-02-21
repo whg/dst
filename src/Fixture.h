@@ -83,6 +83,7 @@ public:
     FadoColumn(string name="FadoCol", int startAddress=0);
     
     void update();
+<<<<<<< HEAD
     
 protected:
     ofParameter<bool> mDoUpdate;
@@ -96,6 +97,10 @@ public:
     AnglepoiseSet(string name="AnglepoiseSet", int startAddress=0);
     
 };
+=======
+};
+
+>>>>>>> 5ed9a3d87f331e5379b8ad7224413cfbdfc61afc
 
 
 

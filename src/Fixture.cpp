@@ -50,6 +50,7 @@ Colorado::Colorado(string name, int startAddress): Fixture(name, startAddress) {
 
 FadoColumn::FadoColumn(string name, int startAddress): Fixture(name, startAddress) {
     
+<<<<<<< HEAD
     mPanel->add(mDoUpdate.set("update", true));
     mPanel->add(mAudioInput.set("audio input", 0, 0, 1));
     mPanel->add(mMaxMeterVal.set("max val", 1, 0, 1));
@@ -102,4 +103,12 @@ AnglepoiseSet::AnglepoiseSet(string name, int startAddress): FadoColumn(name, st
         mMeters.push_back(param);
     }
     
+=======
+    addParameter("one", 1, 0, 0, 255);
+    addParameter("two", 1, 0, 0, 255);
+    addParameter("three", 1, 0, 0, 255);
+    addParameter("four", 1, 0, 0, 255);
+    addParameter("five", 1, 0, 0, 255);
+    addParameter("six", 1, 0, 0, 255);
+>>>>>>> 5ed9a3d87f331e5379b8ad7224413cfbdfc61afc
 }
