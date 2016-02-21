@@ -3,17 +3,19 @@
 const int METER_CONTROL_NUMBER = 60;
 
 #include "ofxOscCenter.h"
+#include "ofxMidiMapper.h"
 
 #include "ofxDmxCenter.h"
 
 void ofApp::setup() {
 //    dmx.connect("/dev/tty.usbserial-EN129270", 512);
     ofBackground(0x10);
-    ofSetWindowShape(600, 600);
+    ofSetWindowShape(1000, 800);
     
     paramGroup.setName("Panel");
     
-    midiIn.openPort("MPK mini");
+    ofxMidiIn::listPorts();
+    midiIn.openPort("Arturia BeatStep");
     midiIn.addListener(this);
 
     lightMap[1] = "chandelier";
@@ -67,6 +69,17 @@ void ofApp::setup() {
         ofxDmxCenter::get().addFixture(something);
         ofxPanelManager::get().addPanel(something->getPanel(), true);
     }
+    
+//    auto something = make_shared<Fixture>("weird", 2);
+//    something->addParameter("test-color", 1, ofColor::red, ofColor(0), ofColor(255));
+//    something->addParameter("test-int", 4, 0, 0, 255);
+//    //    something.parameters["test-float100"] = make_shared<ofParameter<float>>(<#_Args &&__args...#>)
+//    
+//    
+//    ofxDmxCenter::get().addFixture(something);
+//    ofxPanelManager::get().addPanel(something->getPanel(), true);
+
+    
 //    auto something2 = make_shared<Fixture>("testfix");
 //    something2->addParameter("test-color", 1, ofColor::red, ofColor(0), ofColor(255));
 //    //    something.parameters["test-float100"] = make_shared<ofParameter<float>>(<#_Args &&__args...#>)
@@ -82,6 +95,8 @@ void ofApp::setup() {
     ofxDmxCenter::get().assignAddresses();
     
     ofxDmxCenter::get().openFixturesGui();
+    
+    ofxMidiMapper::get().setup(midiIn);
 }
 
 void ofApp::update() {

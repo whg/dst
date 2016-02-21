@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../addons/ofxGuiMappable/src/ofxPanel.cpp"
-            timestampString = "477087091.030776"
+            timestampString = "477245027.634467"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "161"
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../../../include/whelpersg/ofxParameterMapper.cpp"
-            timestampString = "477174218.832491"
+            timestampString = "477696247.694801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
             landmarkName = "ofxParameterMapper::Sources::updateOscList(ofxOscCenterCommandArgs &amp;args)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,75 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../../../include/whelpersg/ofxParameterMapper.cpp"
-            timestampString = "477174218.832491"
+            timestampString = "477696247.694801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
-            landmarkName = "ofxParameterMapper::InputLimits::InputLimits(ofxBaseGui &amp;guiElem, string commandString)"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
+            landmarkName = "ofxParameterMapper::InputLimits::InputLimits(ofxBaseGui &amp;guiElem, string path, string commandString)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../addons/ofxGuiMappable/src/ofxPanelManager.cpp"
-            timestampString = "477145401.355452"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "ofxPanelManager::draw()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../../../include/whelpersg/ofxParameterMapper.h"
-            timestampString = "477152261.15709"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "ofxParameterMapper::modifyParams(const vector&lt;ofxBaseGui*&gt; &amp;baseGuis, T v, float min, float max, string &amp;commandString)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "void ofxParameterMapper::modifyParams&lt;int&gt;(std::__1::vector&lt;ofxBaseGui*, std::__1::allocator&lt;ofxBaseGui*&gt; &gt; const&amp;, int, float, float, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&amp;)"
-                  moduleName = "desperados studio testDebug"
-                  urlString = "file:///Users/whg/Code/include/whelpersg/ofxParameterMapper.h"
-                  timestampString = "477143732.469307"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "516">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "void ofxParameterMapper::modifyParams&lt;float&gt;(std::__1::vector&lt;ofxBaseGui*, std::__1::allocator&lt;ofxBaseGui*&gt; &gt; const&amp;, float, float, float, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&amp;)"
-                  moduleName = "desperados studio testDebug"
-                  urlString = "file:///Users/whg/Code/include/whelpersg/ofxParameterMapper.h"
-                  timestampString = "477143732.471906"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "518">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -301,6 +239,22 @@
                   offsetFromSymbolStart = "110">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../include/whelpersg/ofxDmxCenter.cpp"
+            timestampString = "477245686.989474"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "ofxDmxCenter::assignAddresses()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

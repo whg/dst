@@ -68,7 +68,12 @@ public:
     Colorado(string name="Colorado", int startAddress=0);
 };
 
-
+class FadoColumn : public Fixture {
+public:
+    FadoColumn(string name="FadoCol", int startAddress=0);
+    
+    void update();
+};
 
 
 

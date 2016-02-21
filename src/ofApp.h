@@ -52,5 +52,7 @@ public:
     
     
     shared_ptr<Fixture> something;
+    
+    
 //    ofxParameterMapper pm;
 };

@@ -47,3 +47,13 @@ Colorado::Colorado(string name, int startAddress): Fixture(name, startAddress) {
     addParameter("dimmer", 1, 0, 0, 255);
     addParameter("colour", 2, ofColor::black, ofColor(0), ofColor(255));
 }
+
+FadoColumn::FadoColumn(string name, int startAddress): Fixture(name, startAddress) {
+    
+    addParameter("one", 1, 0, 0, 255);
+    addParameter("two", 1, 0, 0, 255);
+    addParameter("three", 1, 0, 0, 255);
+    addParameter("four", 1, 0, 0, 255);
+    addParameter("five", 1, 0, 0, 255);
+    addParameter("six", 1, 0, 0, 255);
+}
