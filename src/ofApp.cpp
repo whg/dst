@@ -13,7 +13,7 @@ const int METER_CONTROL_NUMBER = 60;
 void ofApp::setup() {
     ofBackground(0x10);
     ofSetWindowShape(1000, 800);
-    
+//    ofSetEscapeQuitsApp(false);
 
     ofxMidiIn::listPorts();
     midiIn.openPort("Arturia BeatStep");
@@ -25,6 +25,7 @@ void ofApp::setup() {
     for (int i =0; i < 10; i++) ofxDmxCenter::get().addFixture(make_shared<FadoColumn>());
     for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
 
+    ofxDmxCenter::get().addFixture(make_shared<RGBFixture>("rgb"));
     
     ofxParameterMapper::get();
     
@@ -39,7 +40,7 @@ void ofApp::setup() {
 
 void ofApp::update() {
 
-    ofxDmxCenter::get().updateFixtures();
+    //ofxDmxCenter::get().updateFixtures();
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }

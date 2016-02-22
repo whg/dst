@@ -8,6 +8,7 @@ class Fixture  {
 public:
     Fixture(string name, int startAddress=0);
     
+    virtual void setup() {}
     virtual void update() {}
     
     void setDmxStartAddress(int a) { mDmxStartAddress = a; }
@@ -78,10 +79,13 @@ public:
     Colorado(string name="Colorado", int startAddress=0);
 };
 
+using RGBFixture = Colorado;
+
 class FadoColumn : public Fixture {
 public:
-    FadoColumn(string name="FadoCol", int startAddress=0);
+    FadoColumn(string name="FadoCol", int startAddress=0, bool callSetup=true);
     
+    virtual void setup();
     void update();
     
 protected:
@@ -95,6 +99,12 @@ class AnglepoiseSet : public FadoColumn {
 public:
     AnglepoiseSet(string name="AnglepoiseSet", int startAddress=0);
     
+    void setup();
+};
+
+class Stairs : public Fixture {
+public:
+    Stairs(string name="Stairs", int startAddress=0);
 };
 
 
