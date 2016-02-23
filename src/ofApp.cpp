@@ -16,16 +16,28 @@ void ofApp::setup() {
 //    ofSetEscapeQuitsApp(false);
 
     ofxMidiIn::listPorts();
-    midiIn.openPort("Arturia BeatStep");
+    midiIn.openPort("Network Session 1");
     
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
 
     
-    for (int i =0; i < 10; i++) ofxDmxCenter::get().addFixture(make_shared<FadoColumn>());
-    for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
+//    for (int i = 0; i < 5; i++) {
+//        auto fadoColumn = make_shared<FadoColumn>();
+//        fadoColumn->setDmxStartAddress(i * 9 + 1);
+//        fadoColumn->setIsFixedAddress(true);
+//        ofxDmxCenter::get().addFixture(fadoColumn);
+//    }
+//    for (int i = 0; i < 5; i++) {
+//        auto fadoColumn = make_shared<FadoColumn>();
+//        fadoColumn->setDmxStartAddress(i * 9 + 49);
+//        fadoColumn->setIsFixedAddress(true);
+//        ofxDmxCenter::get().addFixture(fadoColumn);
+//    }
+    
+    //for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
 
-    ofxDmxCenter::get().addFixture(make_shared<RGBFixture>("rgb"));
+    ofxDmxCenter::get().addFixture(make_shared<Stairs>("stairs", 3 * 48 + 1));
     
     ofxParameterMapper::get();
     
@@ -36,11 +48,14 @@ void ofApp::setup() {
     ofxDmxCenter::get().openFixturesGui();
     
     ofxMidiMapper::get().setup(midiIn);
+    
+    
+    ofAddListener(ofxOscCenter::newMessageEvent, this, &ofApp::newOscMessage);
 }
 
 void ofApp::update() {
 
-    //ofxDmxCenter::get().updateFixtures();
+    ofxDmxCenter::get().updateFixtures();
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
@@ -55,12 +70,42 @@ void ofApp::keyPressed(int key) {
     
     KEY('d', ofxDmxCenter::get().openFixturesGui());
     
-    KEY('s', ofxDmxCenter::get().saveFixtureData());
-    KEY('l', ofxDmxCenter::get().loadFixtureData());
+    KEY('s', {
+        ofxDmxCenter::get().saveFixtureData();
+        ofxMidiMapper::get().save();
+    });
+    KEY('l', {
+        ofxDmxCenter::get().loadFixtureData();
+        ofxMidiMapper::get().load();
+    });
     
     KEY('f', ofToggleFullscreen());
 }
 
 void ofApp::keyReleased(int key) {
 
+}
+
+void ofApp::newOscMessage(ofxOscCenterNewMessageArgs &args) {
+    
+    auto message = args.message;
+    auto address = message.getAddress();
+    if (address.find("/MIDI/note") != string::npos) {
+        ofxMidiMessage midiMessage;
+        midiMessage.pitch = message.getArgAsInt(1);
+        midiMessage.velocity = message.getArgAsInt(2);
+        if (midiMessage.velocity > 0) midiMessage.status = MIDI_NOTE_ON;
+        else midiMessage.status = MIDI_NOTE_OFF;
+        
+        ofxMidiMapper::get().newMidiMessage(midiMessage);
+    }
+    else if (address.find("/MIDI/cc") != string::npos) {
+        ofxMidiMessage midiMessage;
+        midiMessage.control = message.getArgAsInt(1);
+        midiMessage.value = message.getArgAsInt(2);
+        midiMessage.status = MIDI_CONTROL_CHANGE;
+        
+        ofxMidiMapper::get().newMidiMessage(midiMessage);
+    }
+    
 }

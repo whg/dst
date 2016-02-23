@@ -13,6 +13,7 @@ public:
     
     void setDmxStartAddress(int a) { mDmxStartAddress = a; }
     void setDmxUniverse(string u) { mDmxUniverse = u; }
+    void setIsFixedAddress(bool b) { mFixedAddress = b; }
     
     int getDmxStartAddress() { return mDmxStartAddress; }
     string getDmxUniverse() { return mDmxUniverse; }
@@ -89,9 +90,10 @@ public:
     void update();
     
 protected:
-    ofParameter<bool> mDoUpdate;
-    ofParameter<float> mAudioInput, mMaxMeterVal;
+    ofParameter<bool> mDoUpdate, mDoDecay;
+    ofParameter<float> mAudioInput, mMaxMeterVal, mDecay;
     vector<shared_ptr<ofParameter<int>>> mMeters;
+    float mAudioValue, mLastAudioValue;
     
 };
 
@@ -105,6 +107,17 @@ public:
 class Stairs : public Fixture {
 public:
     Stairs(string name="Stairs", int startAddress=0);
+    
+    void update();
+    
+    void presetChanged(int &i);
+    void presetColourChanged(ofColor &col);
+
+protected:
+    ofParameter<bool> mDoUpdate;
+    ofParameter<ofColor> mPresetColour;
+    ofParameter<int> mCurrentPreset;
+    vector<ofColor> mPresetColours;
 };
 
 

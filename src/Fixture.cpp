@@ -52,6 +52,9 @@ FadoColumn::FadoColumn(string name, int startAddress, bool callSetup): Fixture(n
     mPanel->add(mDoUpdate.set("update", true));
     mPanel->add(mAudioInput.set("audio input", 0, 0, 1));
     mPanel->add(mMaxMeterVal.set("max val", 1, 0, 1));
+    mPanel->add(mDoDecay.set("decay", true));
+    mPanel->add(mDecay.set("decay amount", 0.7, 0, 1));
+    
     
     if (callSetup) setup();
 }
@@ -59,11 +62,10 @@ FadoColumn::FadoColumn(string name, int startAddress, bool callSetup): Fixture(n
 void FadoColumn::setup() {
     vector<string> names = { "g1", "g2", "y1", "y2", "r1", "r2" };
     int address = 2, counter = 0;
-    vector<int> addresses = { 2, 3, 5, 6, 8, 9 };
+    vector<int> offsets = { 2, 1, 5, 4, 8, 7 };
     for (auto &name : names) {
         auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
-        addParameter(param, addresses[counter++]);
-        cout << address << endl;
+        addParameter(param, mDmxStartAddress + offsets[counter++]);
         mMeters.push_back(param);
     }
     
@@ -73,8 +75,18 @@ void FadoColumn::setup() {
 void FadoColumn::update() {
     
     if (mDoUpdate) {
+        
     
-        float mappedVal = ofMap(mAudioInput, 0, mMaxMeterVal, 0, mMeters.size(), true);
+        if (mDoDecay && mAudioInput < mAudioValue) {
+            mAudioValue = mAudioValue * mDecay;
+        }
+        else {
+            mAudioValue = mAudioInput;
+        }
+        
+
+        
+        float mappedVal = ofMap(mAudioValue, 0, mMaxMeterVal, 0, mMeters.size(), true);
         if (mappedVal >= mMeters.size()) {
             mappedVal = mMeters.size() - 0.001;
         }
@@ -93,6 +105,9 @@ void FadoColumn::update() {
         float amount = mappedVal - notFullIndex;
         
         mMeters[notFullIndex]->set(255 * amount);
+        
+        mLastAudioValue = mAudioValue;
+
     }
     
 }
@@ -114,7 +129,47 @@ void AnglepoiseSet::setup() {
     }
 }
 
-Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress, false) {
+Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress) {
     
+    mPanel->add(mDoUpdate.set("update", true));
     
+    const int numPresets = 3;
+    mPresetColours.resize(numPresets);
+
+    mPresetColour.addListener(this, &Stairs::presetColourChanged);
+    mPanel->add(mCurrentPreset.set("current preset", 0, 0, numPresets));
+    mPanel->add(mPresetColour.set("preset colour", ofColor::black, ofColor(0), ofColor(255)));
+    
+    int offset = startAddress;
+    mDmxStartAddress = offset;
+    for (int i = 0; i < 13; i++) {
+        addParameter(make_shared<ofParameter<ofColor>>("step" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255, 255)), i*3);
+    }
+    
+    mNumChannels = 13 * 3;
+    mFixedAddress = true;
+    
+
+}
+
+void Stairs::update() {
+    
+    if (mDoUpdate) {
+        
+        auto &currentCol = mPresetColours[mCurrentPreset];
+        for (auto &colourPair : mParameters) {
+            auto &colour = colourPair.second->cast<ofColor>();
+            colour.set(ofColor(currentCol.r, currentCol.g, currentCol.b, colour.get().a));
+            
+        }
+    }
+    
+}
+
+void Stairs::presetChanged(int &i) {
+    
+}
+
+void Stairs::presetColourChanged(ofColor &col) {
+    mPresetColours[mCurrentPreset].set(col);
 }
