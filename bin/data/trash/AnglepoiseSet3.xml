@@ -1,0 +1,21 @@
+<AnglepoiseSet3>
+	<DMX>
+		<Start_addr max="512" min="0">84</Start_addr>
+		<Num_chans max="32" min="1">12</Num_chans>
+		<U>EN129270</U>
+	</DMX>
+	<audio_input max="1" min="0">0</audio_input>
+	<max_val max="1" min="0">1</max_val>
+	<one max="255" min="0">0</one>
+	<two max="255" min="0">0</two>
+	<three max="255" min="0">0</three>
+	<four max="255" min="0">0</four>
+	<five max="255" min="0">0</five>
+	<six max="255" min="0">0</six>
+	<seven max="255" min="0">0</seven>
+	<eight max="255" min="0">0</eight>
+	<nine max="255" min="0">0</nine>
+	<ten max="255" min="0">0</ten>
+	<eleven max="255" min="0">0</eleven>
+	<twelve max="255" min="0">0</twelve>
+</AnglepoiseSet3>

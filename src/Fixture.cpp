@@ -121,24 +121,55 @@ void AnglepoiseSet::setup() {
     vector<string> names = { "g1", "g2", "g3", "g4",
                              "y1", "y2", "y3", "y4",
                              "r1", "r2", "r3", "r4" };
-    int i = 1;
-    for (auto &name : names) {
-        auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
-        addParameter(param, i++);
-        mMeters.push_back(param);
+    
+    vector<ofColor> cols = {
+        ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0),
+        ofColor(255, 200, 0), ofColor(255, 200, 0), ofColor(255, 200, 0), ofColor(255, 200, 0),
+        ofColor(255, 0, 0), ofColor(255, 0, 0), ofColor(255, 0, 0), ofColor(255, 0, 0) };
+
+    assert(names.size() == cols.size());
+    
+    int i = 0;
+    for (int i = 0; i < names.size(); i++) {
+        auto param = make_shared<ofParameter<ofColor>>(names[i], cols[i], ofColor(0), ofColor(255));
+        mMeters.push_back(make_shared<ofParameter<int>>("meter-" + names[i], 0, 0, 255));
+        addParameter(param, i);
+
     }
 }
 
-Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress) {
+void AnglepoiseSet::update() {
+    
+    FadoColumn::update();
+    
+    if (!mDoUpdate) return;
+    
+    int i = 0;
+    for (auto &pair : mParameters) {
+        auto &param = pair.second->cast<ofColor>();
+        float brightness = mMeters[i]->get() / 255.0f;
+        param.set(ofColor(param->r * brightness, param->g * brightness, param->b * brightness, 255));
+        i++;
+    }
+    
+
+}
+
+Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress), mPrefixOffset(90) {
     
     mPanel->add(mDoUpdate.set("update", true));
     
     const int numPresets = 3;
-    mPresetColours.resize(numPresets);
-
+    //mPresetColours.resize(numPresets);
+    
+    vector<ofColor> cols = { ofColor(255, 255, 150), ofColor(0, 255, 0), ofColor(0, 0, 255), ofColor(255, 0, 0) };
+    for (auto col : cols) mPresetColours.push_back(col);
+    
+    
     mPresetColour.addListener(this, &Stairs::presetColourChanged);
-    mPanel->add(mCurrentPreset.set("current preset", 0, 0, numPresets));
-    mPanel->add(mPresetColour.set("preset colour", ofColor::black, ofColor(0), ofColor(255)));
+    mCurrentPreset.addListener(this, &Stairs::presetChanged);
+    mPanel->add(mCurrentPreset.set("currentpreset", mPrefixOffset, 0, 127));
+    mPanel->add(mPresetColour.set("presetcolour", mPresetColours[0], ofColor(0, 0), ofColor(255, 255)));
     
     int offset = startAddress;
     mDmxStartAddress = offset;
@@ -149,14 +180,13 @@ Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress) {
     mNumChannels = 13 * 3;
     mFixedAddress = true;
     
-
 }
 
 void Stairs::update() {
     
     if (mDoUpdate) {
-        
-        auto &currentCol = mPresetColours[mCurrentPreset];
+        int index = ofClamp(mPrefixOffset-mCurrentPreset, 0, 3);
+        auto &currentCol = mPresetColours[index];
         for (auto &colourPair : mParameters) {
             auto &colour = colourPair.second->cast<ofColor>();
             colour.set(ofColor(currentCol.r, currentCol.g, currentCol.b, colour.get().a));
@@ -167,9 +197,130 @@ void Stairs::update() {
 }
 
 void Stairs::presetChanged(int &i) {
-    
+    int q = mCurrentPreset;
+    if (i >= 90 && i < 94) {
+        cout << i-mPrefixOffset << endl;
+        mPresetColour.set(mPresetColours[i-mPrefixOffset]);
+    }
 }
 
 void Stairs::presetColourChanged(ofColor &col) {
-    mPresetColours[mCurrentPreset].set(col);
+    if (mCurrentPreset >= 90 && mCurrentPreset < 94) {
+        int index = mPrefixOffset-mCurrentPreset;
+//        mPresetColours[index].r = col.r;
+//        mPresetColours[index].g = col.g;
+//        mPresetColours[index].b = col.b;
+    }
+}
+
+
+SingleLED::SingleLED(string name, int startAddress):Fixture(name, startAddress) {
+    addParameter(make_shared<ofParameter<unsigned char>>("brightness", 0, 0, 255), 0);
+}
+
+
+Hob::Hob(string name, int startAddress):Fixture(name, startAddress) {
+//    vector<int> addresses = {98, 99, 101, 102 };
+    vector<int> addresses = { 0, 1, 3, 4 };
+    int i = 1;
+    for (auto address : addresses) {
+        addParameter(make_shared<ofParameter<unsigned char>>("pad" + ofToString(i++), 0, 0, 255), address);
+    }
+    
+    mFixedAddress = true;
+}
+
+Bathroom::Bathroom(string name, int startAddress):Fixture(name, startAddress) {
+    
+    vector<pair<string, int>> pairs = {
+        make_pair("blind", 0),
+        make_pair("bath1", 1),
+        make_pair("bath2", 2),
+        make_pair("uvmirror", 3),
+        make_pair("whitemirror", 4),
+    };
+    
+    for (auto &pair : pairs) {
+        addParameter(make_shared<ofParameter<unsigned char>>(pair.first, 0, 0, 255), pair.second);
+    }
+    
+    mFixedAddress = true;
+}
+
+Bulkheads::Bulkheads(string name, int startAddress):Fixture(name, startAddress) {
+
+    addParameter(make_shared<ofParameter<ofColor>>("one", ofColor::black, ofColor(0), ofColor(255)), 0);
+    addParameter(make_shared<ofParameter<ofColor>>("two", ofColor::black, ofColor(0), ofColor(255)), 3);
+    addParameter(make_shared<ofParameter<unsigned char>>("houseone", 0, 0, 255), 7);
+    addParameter(make_shared<ofParameter<unsigned char>>("housetwo", 0, 0, 255), 8);
+    
+    
+    mFixedAddress = true;
+}
+
+Overheads::Overheads(string name, int startAddress):Fixture(name, startAddress) {
+    
+    for (int i = 0; i < 3; i++) {
+        addParameter(make_shared<ofParameter<unsigned char>>("light" + ofToString(i+1), 0, 0, 255), i);
+    }
+    
+    mFixedAddress = true;
+}
+
+Pendants::Pendants(string name, int startAddress):Fixture(name, startAddress) {
+    
+    mPanel->add(mDoUpdate.set("update", true));
+    mPanel->add(mOnTime.set("ontime", 0.2, 0.01, 0.5));
+
+    
+    for (int i = 0; i < 5; i++) {
+        auto param = make_shared<ofParameter<unsigned char>>("light" + ofToString(i+1), 0, 0, 255);
+        param->addListener(this, &Pendants::paramChanged);
+        addParameter(param, i);
+        states.push_back(false);
+        offTimes.push_back(0);
+    }
+    
+    mFixedAddress = true;
+}
+
+void Pendants::update() {
+    
+    if (!mDoUpdate) return;
+    
+    int i = 0;
+    long timeNow = ofGetElapsedTimef();
+    for (auto &pair : mParameters) {
+        if (states[i] && timeNow - offTimes[i] < mOnTime) {
+            auto param = pair.second->cast<unsigned char>();
+            param.removeListener(this, &Pendants::paramChanged);
+            param.set(255);
+            param.addListener(this, &Pendants::paramChanged);
+        }
+        else {
+            auto param = pair.second->cast<unsigned char>();
+            param.removeListener(this, &Pendants::paramChanged);
+            param.set(0);
+            param.addListener(this, &Pendants::paramChanged);
+            states[i] = false;
+        }
+        i++;
+    }
+    
+}
+
+void Pendants::paramChanged(unsigned char &v) {
+    int i = 0;
+    for (auto &pair : mParameters) {
+        if (&pair.second->cast<unsigned char>().get() == &v) {
+            if (i == 0) {
+                offTimes[i] = ofGetElapsedTimef();
+                return;
+            }
+            else {
+                states[i] = true;
+            }
+        }
+        i++;
+    }
 }

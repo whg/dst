@@ -1,0 +1,48 @@
+<ofxParameterMapper version="0.1">
+	<param-maps>
+		<map>
+			<command>Master`/vol</command>
+			<param-path>FadoCol2§audio input</param-path>
+		</map>
+		<map>
+			<command>Master`/vol</command>
+			<param-path>FadoCol3§audio input</param-path>
+		</map>
+		<map>
+			<command>Master`/vol</command>
+			<param-path>FadoCol4§audio input</param-path>
+		</map>
+		<map>
+			<command>Master`/vol</command>
+			<param-path>FadoCol9§audio input</param-path>
+		</map>
+		<map>
+			<command>Master`/vol</command>
+			<param-path>FadoCol10§audio input</param-path>
+		</map>
+		<map>
+			<command>Master`/vol</command>
+			<param-path>FadoCol1§audio input</param-path>
+		</map>
+		<map>
+			<command>bass1`/MIDI/note</command>
+			<param-path>rgb1§colour§r</param-path>
+		</map>
+		<map>
+			<command>bass2`/MIDI/note</command>
+			<param-path>rgb1§colour§b</param-path>
+		</map>
+		<map>
+			<command>bing`/vol</command>
+			<param-path>rgb1§colour§g</param-path>
+		</map>
+	</param-maps>
+	<limits-maps>
+		<map>
+			<key>bing`/vol^rgb1§colour§g</key>
+			<inputMin>0</inputMin>
+			<inputMax>6.375</inputMax>
+			<path>rgb1~g§bing§/vol</path>
+		</map>
+	</limits-maps>
+</ofxParameterMapper>

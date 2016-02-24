@@ -1,0 +1,23 @@
+<stairs1>
+	<DMX>
+		<Start_addr max="512" min="0">145</Start_addr>
+		<Num_chans max="32" min="1">39</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<update>1</update>
+	<currentpreset max="93" min="0">65</currentpreset>
+	<presetcolour>128, 96, 0, 0</presetcolour>
+	<step1>128, 96, 0, 255</step1>
+	<step2>128, 96, 0, 255</step2>
+	<step3>128, 96, 0, 255</step3>
+	<step4>128, 96, 0, 255</step4>
+	<step5>128, 96, 0, 255</step5>
+	<step6>128, 96, 0, 255</step6>
+	<step7>128, 96, 0, 255</step7>
+	<step8>128, 96, 0, 255</step8>
+	<step9>128, 96, 0, 255</step9>
+	<step10>128, 96, 0, 255</step10>
+	<step11>128, 96, 0, 255</step11>
+	<step12>128, 96, 0, 255</step12>
+	<step13>128, 96, 0, 255</step13>
+</stairs1>

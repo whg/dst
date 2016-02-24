@@ -1,0 +1,120 @@
+<ofxParameterMapper version="0.1">
+	<param-maps>
+		<map>
+			<command>BATHROOMTAPSLIGHTS`/MIDI/note</command>
+			<param-path>bathroom1§whitemirror</param-path>
+		</map>
+		<map>
+			<command>BATHROOMTAPSLIGHTS`/MIDI/note</command>
+			<param-path>bathroom1§bath1</param-path>
+		</map>
+		<map>
+			<command>BATHROOMTAPSLIGHTS`/MIDI/note</command>
+			<param-path>bathroom1§bath2</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§one§r</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§houseone</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§housetwo</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol1§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol2§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol3§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol4§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol5§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol6§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol7§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol8§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol9§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>FadoCol10§audio input</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§one§g</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§one§b</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§two§g</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§two§r</param-path>
+		</map>
+		<map>
+			<command>Bulkheads-LOWSYNTHDRM`/MIDI/note</command>
+			<param-path>bulkheads1§two§b</param-path>
+		</map>
+		<map>
+			<command>Stair1-PIANO`/MIDI/note</command>
+			<param-path>overheads1§light1</param-path>
+		</map>
+		<map>
+			<command>Stair1-PIANO`/MIDI/note</command>
+			<param-path>overheads1§light2</param-path>
+		</map>
+		<map>
+			<command>THERMOSTATTOLIGHTS`/MIDI/cc</command>
+			<param-path>stairs1§current preset</param-path>
+		</map>
+	</param-maps>
+	<limits-maps>
+		<map>
+			<key>Bulkheads-LOWSYNTHDRM`/MIDI/note^FadoCol5§audio input</key>
+			<inputMin>0</inputMin>
+			<inputMax>124.95</inputMax>
+			<path>FadoCol5~audio§Bulkheads-LOWSYNTHDRM§/MIDI/note</path>
+		</map>
+		<map>
+			<key>Stair1-PIANO`/MIDI/note^overheads1§light1</key>
+			<inputMin>0</inputMin>
+			<inputMax>82</inputMax>
+			<path>overheads1~light1§Stair1-PIANO§/MIDI/note</path>
+		</map>
+		<map>
+			<key>Stair1-PIANO`/MIDI/note^overheads1§light2</key>
+			<inputMin>0</inputMin>
+			<inputMax>80</inputMax>
+			<path>overheads1~light2§Stair1-PIANO§/MIDI/note</path>
+		</map>
+	</limits-maps>
+</ofxParameterMapper>

@@ -1,0 +1,9 @@
+<ofxMidiMapper version="0.1">
+	<note-maps/>
+	<control-maps>
+		<map>
+			<control>10</control>
+			<path>FadoCol1§max val</path>
+		</map>
+	</control-maps>
+</ofxMidiMapper>

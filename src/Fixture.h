@@ -102,6 +102,8 @@ public:
     AnglepoiseSet(string name="AnglepoiseSet", int startAddress=0);
     
     void setup();
+    void update();
+    
 };
 
 class Stairs : public Fixture {
@@ -118,8 +120,52 @@ protected:
     ofParameter<ofColor> mPresetColour;
     ofParameter<int> mCurrentPreset;
     vector<ofColor> mPresetColours;
+    
+    const int mPrefixOffset;
+
 };
 
+
+class SingleLED : public Fixture {
+public:
+    SingleLED(string name="SingleLED", int startAddress=0);
+};
+
+
+
+class Hob :public Fixture {
+public:
+    Hob(string name="Hob", int startAddress=0);
+};
+
+class Bathroom :public Fixture {
+public:
+    Bathroom(string name="Bathroom", int startAddress=0);
+};
+
+class Bulkheads :public Fixture {
+public:
+    Bulkheads(string name="Bulkheads", int startAddress=0);
+};
+
+class Overheads :public Fixture {
+public:
+    Overheads(string name="Overheads", int startAddress=0);
+};
+
+class Pendants :public Fixture {
+public:
+    Pendants(string name="Pendants", int startAddress=0);
+    
+    void update();
+    void paramChanged(unsigned char &i);
+
+    ofParameter<bool> mDoUpdate;
+    ofParameter<float> mOnTime;
+    vector<bool> states;
+    vector<long> offTimes;
+    
+};
 
 
 

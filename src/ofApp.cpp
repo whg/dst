@@ -22,23 +22,31 @@ void ofApp::setup() {
     ofSetFrameRate(60);
 
     
-//    for (int i = 0; i < 5; i++) {
-//        auto fadoColumn = make_shared<FadoColumn>();
-//        fadoColumn->setDmxStartAddress(i * 9 + 1);
-//        fadoColumn->setIsFixedAddress(true);
-//        ofxDmxCenter::get().addFixture(fadoColumn);
-//    }
-//    for (int i = 0; i < 5; i++) {
-//        auto fadoColumn = make_shared<FadoColumn>();
-//        fadoColumn->setDmxStartAddress(i * 9 + 49);
-//        fadoColumn->setIsFixedAddress(true);
-//        ofxDmxCenter::get().addFixture(fadoColumn);
-//    }
+    for (int i = 0; i < 5; i++) {
+        auto fadoColumn = make_shared<FadoColumn>();
+        fadoColumn->setDmxStartAddress(i * 9 + 1);
+        fadoColumn->setIsFixedAddress(true);
+        ofxDmxCenter::get().addFixture(fadoColumn);
+    }
+    for (int i = 0; i < 5; i++) {
+        auto fadoColumn = make_shared<FadoColumn>();
+        fadoColumn->setDmxStartAddress(i * 9 + 49);
+        fadoColumn->setIsFixedAddress(true);
+        ofxDmxCenter::get().addFixture(fadoColumn);
+    }
     
-    //for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
+    for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
 
     ofxDmxCenter::get().addFixture(make_shared<Stairs>("stairs", 3 * 48 + 1));
     
+//    ofxDmxCenter::get().addFixture(make_shared<SingleLED>("umbrella", 97));
+    ofxDmxCenter::get().addFixture(make_shared<Hob>("hob", 97));
+
+    ofxDmxCenter::get().addFixture(make_shared<Bathroom>("bathroom", 193));
+    ofxDmxCenter::get().addFixture(make_shared<Bulkheads>("bulkheads", 199));
+    ofxDmxCenter::get().addFixture(make_shared<Overheads>("overheads", 241));
+    ofxDmxCenter::get().addFixture(make_shared<Pendants>("pendants", 241+11*3));
+
     ofxParameterMapper::get();
     
     ofxOscCenter::get();

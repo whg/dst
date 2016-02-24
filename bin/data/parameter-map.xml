@@ -1,0 +1,13 @@
+<ofxParameterMapper version="0.1">
+	<param-maps>
+		<map>
+			<command>Stair1-PIANO`/MIDI/note</command>
+			<param-path>overheads1§light1</param-path>
+		</map>
+		<map>
+			<command>THERMOSTATTOLIGHTS`/MIDI/cc</command>
+			<param-path>stairs1§currentpreset</param-path>
+		</map>
+	</param-maps>
+	<limits-maps/>
+</ofxParameterMapper>
