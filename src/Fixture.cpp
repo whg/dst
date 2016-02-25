@@ -114,6 +114,7 @@ void FadoColumn::update() {
 
 AnglepoiseSet::AnglepoiseSet(string name, int startAddress): FadoColumn(name, startAddress, false) {
     
+    FadoColumn::setup();
     setup();
 }
 
@@ -124,7 +125,7 @@ void AnglepoiseSet::setup() {
     
     vector<ofColor> cols = {
         ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0),
-        ofColor(255, 200, 0), ofColor(255, 200, 0), ofColor(255, 200, 0), ofColor(255, 200, 0),
+        ofColor(255, 250, 0), ofColor(255, 250, 0), ofColor(255, 250, 0), ofColor(255, 250, 0),
         ofColor(255, 0, 0), ofColor(255, 0, 0), ofColor(255, 0, 0), ofColor(255, 0, 0) };
 
     assert(names.size() == cols.size());
@@ -142,16 +143,51 @@ void AnglepoiseSet::update() {
     
     FadoColumn::update();
     
-    if (!mDoUpdate) return;
+//    if (!mDoUpdate) return;
+//    
+//    int i = 0;
+//    for (auto &pair : mParameters) {
+//        auto &param = pair.second->cast<ofColor>();
+//        float brightness = mMeters[i]->get() / 255.0f;
+//        param.set(ofColor(param->r * brightness, param->g * brightness, param->b * brightness, 255));
+//        i++;
+//    }
     
-    int i = 0;
-    for (auto &pair : mParameters) {
-        auto &param = pair.second->cast<ofColor>();
-        float brightness = mMeters[i]->get() / 255.0f;
-        param.set(ofColor(param->r * brightness, param->g * brightness, param->b * brightness, 255));
-        i++;
+
+}
+
+
+MainFloor::MainFloor(string name, int startAddress): Fixture(name, startAddress) {
+    
+    mPanel->add(mDoUpdate.set("update", true));
+
+    mPanel->add(mPresetColour.set("presetcolour", ofColor::black, ofColor(0, 0), ofColor(255, 255)));
+
+    
+    // 12 anglepoise, 12 lamp, 6 shoes
+    for (int i = 0; i < 12; i++) {
+        addParameter(make_shared<ofParameter<ofColor>>("anglepoise" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3);
     }
     
+    for (int i = 0; i < 12; i++) {
+        addParameter(make_shared<ofParameter<ofColor>>("tablelamp" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3 + 12 * 3);
+    }
+    
+    for (int i = 0; i < 6; i++) {
+        addParameter(make_shared<ofParameter<ofColor>>("shoes" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3 + 24 * 3);
+    }
+    
+}
+
+void MainFloor::update() {
+    if (mDoUpdate) {
+        auto &currentCol = mPresetColour.get();
+        for (auto &colourPair : mParameters) {
+            auto &colour = colourPair.second->cast<ofColor>();
+            colour.set(currentCol);
+            
+        }
+    }
 
 }
 

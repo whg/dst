@@ -46,6 +46,7 @@ void ofApp::setup() {
     ofxDmxCenter::get().addFixture(make_shared<Bulkheads>("bulkheads", 199));
     ofxDmxCenter::get().addFixture(make_shared<Overheads>("overheads", 241));
     ofxDmxCenter::get().addFixture(make_shared<Pendants>("pendants", 241+11*3));
+    ofxDmxCenter::get().addFixture(make_shared<MainFloor>("mainfloor", 288 + 1));
 
     ofxParameterMapper::get();
     
@@ -56,6 +57,7 @@ void ofApp::setup() {
     ofxDmxCenter::get().openFixturesGui();
     
     ofxMidiMapper::get().setup(midiIn);
+    ofxMidiMapper::get().load();
     
     
     ofAddListener(ofxOscCenter::newMessageEvent, this, &ofApp::newOscMessage);

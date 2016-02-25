@@ -106,6 +106,19 @@ public:
     
 };
 
+class MainFloor : public Fixture {
+public:
+    MainFloor(string name="MainFloor", int startAddress=0);
+    
+    ofParameter<bool> mDoUpdate;
+
+    ofParameter<ofColor> mPresetColour;
+    
+    void update();
+    
+};
+
+
 class Stairs : public Fixture {
 public:
     Stairs(string name="Stairs", int startAddress=0);
