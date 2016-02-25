@@ -1,0 +1,19 @@
+<FadoCol3>
+	<DMX>
+		<Start_addr max="512" min="0">19</Start_addr>
+		<Num_chans max="32" min="1">9</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<update>1</update>
+	<audio_input max="1" min="0">0</audio_input>
+	<max_val max="16.575" min="0">1.32136</max_val>
+	<decay>1</decay>
+	<decay_amount max="1" min="0">0.848995</decay_amount>
+	<g1 max="255" min="0">0</g1>
+	<g2 max="255" min="0">0</g2>
+	<y1 max="255" min="0">0</y1>
+	<y2 max="255" min="0">0</y2>
+	<r1 max="255" min="0">0</r1>
+	<r2 max="255" min="0">0</r2>
+<FadoCol3/>
+</FadoCol3>

@@ -1,0 +1,7 @@
+<hob1>
+	<DMX>
+		<Start_addr max="512" min="0">97</Start_addr>
+		<Num_chans max="32" min="1">4</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<pad1 max="

@@ -1,0 +1,9 @@
+<bulkheads1>
+	<DMX>
+		<Start_addr max="512" min="0">199</Start_addr>
+		<Num_chans max="32" min="1">8</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<one>0, 255, 255, 0</one>
+	<two>255, 255, 255, 0</two>
+	<houseone max="

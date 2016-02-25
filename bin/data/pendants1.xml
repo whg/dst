@@ -1,0 +1,9 @@
+<pendants1>
+	<DMX>
+		<Start_addr max="512" min="0">274</Start_addr>
+		<Num_chans max="32" min="1">5</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<update>1</update>
+	<ontime max="0.5" min="0.01">0.26725</ontime>
+	<light1 max="
