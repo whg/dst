@@ -186,6 +186,7 @@ public:
 
     ofParameter<bool> mDoUpdate;
     ofParameter<float> mOnTime;
+    ofParameter<unsigned char> mBrightness;
     vector<bool> states;
     vector<float> offTimes, onTimes;
     

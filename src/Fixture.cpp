@@ -114,7 +114,6 @@ void FadoColumn::update() {
 
 AnglepoiseSet::AnglepoiseSet(string name, int startAddress): FadoColumn(name, startAddress, false) {
     
-    FadoColumn::setup();
     setup();
 }
 
@@ -122,6 +121,13 @@ void AnglepoiseSet::setup() {
     vector<string> names = { "g1", "g2", "g3", "g4",
                              "y1", "y2", "y3", "y4",
                              "r1", "r2", "r3", "r4" };
+
+//    int counter 
+//    for (auto &name : names) {
+//        auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
+//        addParameter(param, mDmxStartAddress + offsets[counter++]);
+//        mMeters.push_back(param);
+//    }
     
     vector<ofColor> cols = {
         ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0),
@@ -165,7 +171,7 @@ TableSet::TableSet(string name, int startAddress): Fixture(name, startAddress) {
 //    }
     
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
         addParameter(make_shared<ofParameter<ofColor>>("col" + ofToString(i), ofColor(255, 255, 100), ofColor(0), ofColor(255)), i*3);
     }
 }
@@ -179,7 +185,7 @@ MainFloor::MainFloor(string name, int startAddress): Fixture(name, startAddress)
 
     
     // 12 anglepoise, 12 lamp, 6 shoes
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 30; i++) {
         addParameter(make_shared<ofParameter<ofColor>>("anglepoise" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3);
     }
     
@@ -291,8 +297,8 @@ Bathroom::Bathroom(string name, int startAddress):Fixture(name, startAddress) {
 
 Bulkheads::Bulkheads(string name, int startAddress):Fixture(name, startAddress) {
 
-    addParameter(make_shared<ofParameter<ofColor>>("one", ofColor::black, ofColor(0), ofColor(255)), 0);
-    addParameter(make_shared<ofParameter<ofColor>>("two", ofColor::black, ofColor(0), ofColor(255)), 3);
+    addParameter(make_shared<ofParameter<ofColor>>("one", ofColor::black, ofColor(0, 0), ofColor(255)), 0);
+    addParameter(make_shared<ofParameter<ofColor>>("two", ofColor::black, ofColor(0, 0), ofColor(255)), 3);
     addParameter(make_shared<ofParameter<unsigned char>>("houseone", 0, 0, 255), 7);
     addParameter(make_shared<ofParameter<unsigned char>>("housetwo", 0, 0, 255), 8);
     
@@ -313,7 +319,7 @@ Pendants::Pendants(string name, int startAddress):Fixture(name, startAddress) {
     
     mPanel->add(mDoUpdate.set("update", true));
     mPanel->add(mOnTime.set("ontime", 0.2, 0.01, 0.5));
-
+    mPanel->add(mBrightness.set("brightness", 255, 0, 255));
     
     for (int i = 0; i < 5; i++) {
         auto param = make_shared<ofParameter<unsigned char>>("light" + ofToString(i+1), 0, 0, 255);
@@ -332,14 +338,17 @@ Pendants::Pendants(string name, int startAddress):Fixture(name, startAddress) {
 }
 
 void Pendants::hitChanged(unsigned char &v) {
+    
+    if (v == 0) return;
+    
     int i = 0;
     float timeNow = ofGetElapsedTimef();
     auto iter = mParameters.begin();
     for (auto &hit : hits) {
         if (&hit->get() == &v) {
             onTimes[i] = timeNow;
-            iter->second->cast<unsigned char>().set(255);
-            cout << "on at time " << timeNow << endl;
+            iter->second->cast<unsigned char>().set(mBrightness);
+//            cout << "on at time " << timeNow << endl;
             return;
         }
         i++;
@@ -358,8 +367,8 @@ void Pendants::update() {
 
         float timeSince = timeNow - onTimes[i];
         if (timeSince < mOnTime) {
-            param.set(255);
-            cout << i << " staying on at " << timeNow << endl;
+            param.set(mBrightness );
+//            cout << i << " staying on at " << timeNow << endl;
         }
         else {
             param.set(0);
