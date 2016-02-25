@@ -43,8 +43,8 @@ Colorado::Colorado(string name, int startAddress): Fixture(name, startAddress) {
     
     // in AR1.D mode (or tour as they call it)
     
-    addParameter("dimmer", 1, 0, 0, 255);
-    addParameter("colour", 2, ofColor::black, ofColor(0), ofColor(255));
+//    addParameter("dimmer", 1, 0, 0, 255);
+    addParameter("colour", 0, ofColor::black, ofColor(0), ofColor(255));
 }
 
 FadoColumn::FadoColumn(string name, int startAddress, bool callSetup): Fixture(name, startAddress) {
@@ -156,6 +156,20 @@ void AnglepoiseSet::update() {
 
 }
 
+TableSet::TableSet(string name, int startAddress): Fixture(name, startAddress) {
+    
+//    vector<ofColor> cols = {ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(255, 255, 0), ofColor(255, 255, 0), ofColor(255, 0, 0), ofColor(0, 0, 0) };
+//    int i = 0;
+//    for (auto &col : cols) {
+//        addParameter(make_shared<ofColor>("col" + ofToString(i+1), ), i*3);
+//    }
+    
+    
+    for (int i = 0; i < 10; i++) {
+        addParameter(make_shared<ofParameter<ofColor>>("col" + ofToString(i), ofColor(255, 255, 100), ofColor(0), ofColor(255)), i*3);
+    }
+}
+
 
 MainFloor::MainFloor(string name, int startAddress): Fixture(name, startAddress) {
     
@@ -165,16 +179,8 @@ MainFloor::MainFloor(string name, int startAddress): Fixture(name, startAddress)
 
     
     // 12 anglepoise, 12 lamp, 6 shoes
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 10; i++) {
         addParameter(make_shared<ofParameter<ofColor>>("anglepoise" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3);
-    }
-    
-    for (int i = 0; i < 12; i++) {
-        addParameter(make_shared<ofParameter<ofColor>>("tablelamp" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3 + 12 * 3);
-    }
-    
-    for (int i = 0; i < 6; i++) {
-        addParameter(make_shared<ofParameter<ofColor>>("shoes" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3 + 24 * 3);
     }
     
 }
@@ -205,7 +211,7 @@ Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress), mPre
     mPresetColour.addListener(this, &Stairs::presetColourChanged);
     mCurrentPreset.addListener(this, &Stairs::presetChanged);
     mPanel->add(mCurrentPreset.set("currentpreset", mPrefixOffset, 0, 127));
-    mPanel->add(mPresetColour.set("presetcolour", mPresetColours[0], ofColor(0, 0), ofColor(255, 255)));
+    mPanel->add(mPresetColour.set("presetcolour", ofColor(mPresetColours[0].r, mPresetColours[0].g, mPresetColours[0].b, 0), ofColor(0, 0), ofColor(255, 255)));
     
     int offset = startAddress;
     mDmxStartAddress = offset;
@@ -221,7 +227,7 @@ Stairs::Stairs(string name, int startAddress): Fixture(name, startAddress), mPre
 void Stairs::update() {
     
     if (mDoUpdate) {
-        int index = ofClamp(mPrefixOffset-mCurrentPreset, 0, 3);
+        int index = ofClamp(mCurrentPreset-mPrefixOffset, 0, 3);
         auto &currentCol = mPresetColours[index];
         for (auto &colourPair : mParameters) {
             auto &colour = colourPair.second->cast<ofColor>();
@@ -311,13 +317,34 @@ Pendants::Pendants(string name, int startAddress):Fixture(name, startAddress) {
     
     for (int i = 0; i < 5; i++) {
         auto param = make_shared<ofParameter<unsigned char>>("light" + ofToString(i+1), 0, 0, 255);
-        param->addListener(this, &Pendants::paramChanged);
+//        param->addListener(this, &Pendants::paramChanged);
         addParameter(param, i);
         states.push_back(false);
         offTimes.push_back(0);
+        onTimes.push_back(0);
+        auto h = make_shared<ofParameter<unsigned char>>("hits" + ofToString(i+1), 0, 0, 127);
+        h->addListener(this, &Pendants::hitChanged);
+        mPanel->add(*h.get());
+        hits.push_back(h);
     }
     
     mFixedAddress = true;
+}
+
+void Pendants::hitChanged(unsigned char &v) {
+    int i = 0;
+    float timeNow = ofGetElapsedTimef();
+    auto iter = mParameters.begin();
+    for (auto &hit : hits) {
+        if (&hit->get() == &v) {
+            onTimes[i] = timeNow;
+            iter->second->cast<unsigned char>().set(255);
+            cout << "on at time " << timeNow << endl;
+            return;
+        }
+        i++;
+        iter++;
+    }
 }
 
 void Pendants::update() {
@@ -325,23 +352,56 @@ void Pendants::update() {
     if (!mDoUpdate) return;
     
     int i = 0;
-    long timeNow = ofGetElapsedTimef();
+    float timeNow = ofGetElapsedTimef();
     for (auto &pair : mParameters) {
-        if (states[i] && timeNow - offTimes[i] < mOnTime) {
-            auto param = pair.second->cast<unsigned char>();
-            param.removeListener(this, &Pendants::paramChanged);
+        auto &param = pair.second->cast<unsigned char>();
+
+        float timeSince = timeNow - onTimes[i];
+        if (timeSince < mOnTime) {
             param.set(255);
-            param.addListener(this, &Pendants::paramChanged);
+            cout << i << " staying on at " << timeNow << endl;
         }
         else {
-            auto param = pair.second->cast<unsigned char>();
-            param.removeListener(this, &Pendants::paramChanged);
             param.set(0);
-            param.addListener(this, &Pendants::paramChanged);
-            states[i] = false;
+            //cout << i << " off at time " << timeNow << endl;
+
         }
         i++;
     }
+    
+    
+//    int i = 0;
+//    float timeNow = ofGetElapsedTimef();
+//    for (auto &pair : mParameters) {
+//        if (states[i]) {
+//            auto timeSince = (timeNow - onTimes[i]);
+//            if (timeSince > mOnTime) {
+//                auto onFor = (timeNow - offTimes[i]);
+//                auto &param = pair.second->cast<unsigned char>();
+//                param.removeListener(this, &Pendants::paramChanged);
+//                param.set(0);
+//                param.addListener(this, &Pendants::paramChanged);
+//                states[i] = false;
+//                cout << "closed after " << timeSince << " on " << i << endl;
+//                cout << "closed at" << timeNow << endl;
+//            }
+//            else {
+//                cout << "still on after " << timeSince << " on " << i << endl;
+////                auto param = pair.second->cast<unsigned char>();
+////                param.removeListener(this, &Pendants::paramChanged);
+////                param.set(255);
+////                param.addListener(this, &Pendants::paramChanged);
+////                if (<#condition#>) {
+////                    <#statements#>
+////                }
+//
+//            }
+//        }
+//        
+//         i++;
+//    }
+//    
+//    cout << "frame at " << timeNow << endl;
     
 }
 
@@ -349,14 +409,36 @@ void Pendants::paramChanged(unsigned char &v) {
     int i = 0;
     for (auto &pair : mParameters) {
         if (&pair.second->cast<unsigned char>().get() == &v) {
-            if (i == 0) {
-                offTimes[i] = ofGetElapsedTimef();
-                return;
+            if (v == 0) {
+                if (states[i]) { // don't turn off
+                    auto &param = pair.second->cast<unsigned char>();
+                    param.removeListener(this, &Pendants::paramChanged);
+                    param.set(255);
+                    param.addListener(this, &Pendants::paramChanged);
+                }
+
             }
             else {
-                states[i] = true;
+                if (!states[i]) {
+                    states[i] = true;
+                    auto &param = pair.second->cast<unsigned char>();
+                    param.removeListener(this, &Pendants::paramChanged);
+                    param.set(255);
+                    param.addListener(this, &Pendants::paramChanged);
+                    onTimes[i] = ofGetElapsedTimef();
+                    cout << "set for " << i << " with " << v << endl;
+                    cout << "on at time " << onTimes[i] << endl;
+                }
             }
         }
         i++;
     }
+}
+
+StairWash::StairWash(string name, int startAddress):Fixture(name, startAddress) {
+    
+}
+
+void StairWash::update() {
+    
 }

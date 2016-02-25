@@ -106,6 +106,17 @@ public:
     
 };
 
+class TableSet : public Fixture {
+public:
+    TableSet(string name="TableSet", int startAddress=0);
+    
+//    void setup();
+//    void update();
+    
+};
+
+
+
 class MainFloor : public Fixture {
 public:
     MainFloor(string name="MainFloor", int startAddress=0);
@@ -176,9 +187,17 @@ public:
     ofParameter<bool> mDoUpdate;
     ofParameter<float> mOnTime;
     vector<bool> states;
-    vector<long> offTimes;
+    vector<float> offTimes, onTimes;
     
+    vector<shared_ptr<ofParameter<unsigned char>>> hits;
+    void hitChanged(unsigned char &v);
 };
 
 
+class StairWash :public Fixture {
+public:
+    StairWash(string name="StairWash", int startAddress=0);
+    
+    void update();
+};
 
