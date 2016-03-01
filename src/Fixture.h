@@ -103,7 +103,8 @@ public:
     
     void setup();
     void update();
-    
+    vector<shared_ptr<ofParameter<int>>> mLongMeters;
+
 };
 
 class TableSet : public Fixture {
@@ -195,10 +196,9 @@ public:
 };
 
 
-class StairWash :public Fixture {
+class Kitchen :public Fixture {
 public:
-    StairWash(string name="StairWash", int startAddress=0);
+    Kitchen(string name="Kitchen", int startAddress=0);
     
     void update();
 };
-

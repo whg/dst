@@ -78,7 +78,7 @@ void FadoColumn::update() {
         
     
         if (mDoDecay && mAudioInput < mAudioValue) {
-            mAudioValue = mAudioValue * mDecay;
+            mAudioValue = mAudioValue - mDecay;
         }
         else {
             mAudioValue = mAudioInput;
@@ -118,36 +118,81 @@ AnglepoiseSet::AnglepoiseSet(string name, int startAddress): FadoColumn(name, st
 }
 
 void AnglepoiseSet::setup() {
-    vector<string> names = { "g1", "g2", "g3", "g4",
-                             "y1", "y2", "y3", "y4",
-                             "r1", "r2", "r3", "r4" };
-
-//    int counter 
-//    for (auto &name : names) {
-//        auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
-//        addParameter(param, mDmxStartAddress + offsets[counter++]);
-//        mMeters.push_back(param);
-//    }
     
-    vector<ofColor> cols = {
-        ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(0, 255, 0),
-        ofColor(255, 250, 0), ofColor(255, 250, 0), ofColor(255, 250, 0), ofColor(255, 250, 0),
-        ofColor(255, 0, 0), ofColor(255, 0, 0), ofColor(255, 0, 0), ofColor(255, 0, 0) };
-
-    assert(names.size() == cols.size());
-    
+    vector<string> names = { "g1", "g2", "y1", "y2", "r1", "r2" };
     int i = 0;
-    for (int i = 0; i < names.size(); i++) {
-        auto param = make_shared<ofParameter<ofColor>>(names[i], cols[i], ofColor(0), ofColor(255));
-        mMeters.push_back(make_shared<ofParameter<int>>("meter-" + names[i], 0, 0, 255));
-        addParameter(param, i);
+    
+    vector<string> nameslong = { "g1", "g2", "g3", "g4", "y1", "y2", "y3", "y4","r1", "r2","r3", "r4" };
+    for (auto &name : nameslong) {
+        auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
+        addParameter(make_shared<ofParameter<ofColor>>(name, ofColor(0, 0), ofColor(0), ofColor(255)), i*3);
+        mLongMeters.push_back(param);
 
+        i++;
     }
+
+
+    for (auto &name : names) {
+        auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
+        addParameter(make_shared<ofParameter<ofColor>>(name, ofColor(0, 0), ofColor(0), ofColor(255)), i*3);
+        mMeters.push_back(param);
+        i++;
+    }
+    
+    for (auto &name : names) {
+        auto param = make_shared<ofParameter<int>>(name, 0, 0, 255);
+        addParameter(make_shared<ofParameter<ofColor>>(name, ofColor(0, 0), ofColor(0), ofColor(255)), i*3);
+        i++;
+    }
+    
+    mNumChannels.set(names.size() * 3 * 2);
+
 }
 
 void AnglepoiseSet::update() {
     
+    if (!mDoUpdate) return;
+    
     FadoColumn::update();
+    vector<ofColor> cols = {ofColor(0, 255, 0), ofColor(0, 255, 0), ofColor(255, 255, 0), ofColor(255, 255, 0), ofColor(255, 0, 0), ofColor(255, 0, 0) };
+
+    int offset = 12 * 3;
+    for (int i = 0; i < 5; i++) {
+        auto col = cols[i % 5];
+        col.a*= (mMeters[i]->get() / 255.0f);
+        mParameters[offset+i*3]->cast<ofColor>().set(col);
+        mParameters[offset+i*2*3]->cast<ofColor>().set(col);
+    }
+    
+    
+    float mappedVal = ofMap(mAudioValue, 0, mMaxMeterVal, 0, mLongMeters.size(), true);
+    if (mappedVal >= mLongMeters.size()) {
+        mappedVal = mLongMeters.size() - 0.001;
+    }
+    
+    
+    for (int i = 0; i < mLongMeters.size(); i++) {
+        if (i <= mappedVal) {
+            mLongMeters[i]->set(255);
+        }
+        else {
+            mLongMeters[i]->set(0);
+        }
+    }
+    
+    int notFullIndex = floor(mappedVal);
+    float amount = mappedVal - notFullIndex;
+    
+    mLongMeters[notFullIndex]->set(255 * amount);
+    
+    for (int i = 0; i < 12; i++) {
+        auto col = cols[i /2];
+        col.a*= (mLongMeters[i]->get() / 255.0f);
+        mParameters[i*3]->cast<ofColor>().set(col);
+//        mParameters[i*6+3]->cast<ofColor>().set(col);
+        
+    }
+    
     
 //    if (!mDoUpdate) return;
 //    
@@ -185,7 +230,8 @@ MainFloor::MainFloor(string name, int startAddress): Fixture(name, startAddress)
 
     
     // 12 anglepoise, 12 lamp, 6 shoes
-    for (int i = 0; i < 30; i++) {
+    // no anglepoise
+    for (int i = 0; i < 18; i++) {
         addParameter(make_shared<ofParameter<ofColor>>("anglepoise" + ofToString(i+1), ofColor::black, ofColor(0, 0), ofColor(255)), i*3);
     }
     
@@ -444,10 +490,46 @@ void Pendants::paramChanged(unsigned char &v) {
     }
 }
 
-StairWash::StairWash(string name, int startAddress):Fixture(name, startAddress) {
+Kitchen::Kitchen(string name, int startAddress):Fixture(name, startAddress) {
+    vector<int> hobNums = { 0, 1, 3, 4 };
+    for (int i = 0; i < hobNums.size(); i++) {
+        addParameter(make_shared<ofParameter<unsigned char>>("hob" + ofToString(i+1), 0, 0, 255), hobNums[i]);
+    }
+    addParameter(make_shared<ofParameter<unsigned char>>("ovenleds2", 0, 0, 255), 2);
+    addParameter(make_shared<ofParameter<unsigned char>>("ovenleds1", 0, 0, 255), 5);
+    addParameter(make_shared<ofParameter<unsigned char>>("ovenscreen", 0, 0, 255), 6);
+    addParameter(make_shared<ofParameter<unsigned char>>("umbrella", 0, 0, 255), 7);
+    addParameter(make_shared<ofParameter<unsigned char>>("toaster", 0, 0, 255), 8);
+    addParameter(make_shared<ofParameter<ofColor>>("head", ofColor(0, 0), ofColor(0), ofColor(255)), 9);
+    addParameter(make_shared<ofParameter<unsigned char>>("binbag1", 0, 0, 255), 12);
+    addParameter(make_shared<ofParameter<unsigned char>>("binbag2", 0, 0, 255), 13);
+    addParameter(make_shared<ofParameter<unsigned char>>("bindrum1", 0, 0, 255), 14);
+    addParameter(make_shared<ofParameter<unsigned char>>("bindrum2", 0, 0, 255), 15);
+    addParameter(make_shared<ofParameter<unsigned char>>("box1", 0, 0, 255), 16);
+    addParameter(make_shared<ofParameter<unsigned char>>("pineapple", 0, 0, 255), 17);
+    addParameter(make_shared<ofParameter<unsigned char>>("skull", 0, 0, 255), 18);
+    addParameter(make_shared<ofParameter<unsigned char>>("bag", 0, 0, 255), 19);
+    addParameter(make_shared<ofParameter<unsigned char>>("bag", 0, 0, 255), 20);
+    addParameter(make_shared<ofParameter<unsigned char>>("extactor", 0, 0, 255), 21);
+    addParameter(make_shared<ofParameter<unsigned char>>("plug", 0, 0, 255), 22);
+    
+    addParameter(make_shared<ofParameter<unsigned char>>("ear", 0, 0, 255), 24);
+    addParameter(make_shared<ofParameter<unsigned char>>("hihat", 0, 0, 255), 25);
+    addParameter(make_shared<ofParameter<unsigned char>>("far-right", 0, 0, 255), 26);
+    
+    addParameter(make_shared<ofParameter<unsigned char>>("far-left", 0, 0, 255), 27);
+    addParameter(make_shared<ofParameter<unsigned char>>("snare", 0, 0, 255), 28);
+    addParameter(make_shared<ofParameter<unsigned char>>("tom", 0, 0, 255), 29);
+    
+    addParameter(make_shared<ofParameter<unsigned char>>("topleds", 0, 0, 255), 30);
+    addParameter(make_shared<ofParameter<unsigned char>>("oven-bottom", 0, 0, 255), 31);
+    addParameter(make_shared<ofParameter<unsigned char>>("oven-top", 0, 0, 255), 32);
+    
+    addParameter(make_shared<ofParameter<unsigned char>>("kettle", 0, 0, 255), 23);
+
     
 }
 
-void StairWash::update() {
+void Kitchen::update() {
     
 }

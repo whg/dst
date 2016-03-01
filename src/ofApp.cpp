@@ -35,7 +35,7 @@ void ofApp::setup() {
         ofxDmxCenter::get().addFixture(fadoColumn);
     }
     
-    for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
+//    for (int i = 0; i < 3; i++) ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>());
 
     ofxDmxCenter::get().addFixture(make_shared<Stairs>("stairs", 3 * 48 + 1));
     
@@ -46,14 +46,18 @@ void ofApp::setup() {
     ofxDmxCenter::get().addFixture(make_shared<Bulkheads>("bulkheads", 199));
     ofxDmxCenter::get().addFixture(make_shared<Overheads>("overheads", 271));
     ofxDmxCenter::get().addFixture(make_shared<Pendants>("pendants", 274));
-    ofxDmxCenter::get().addFixture(make_shared<MainFloor>("mainfloor", 288 + 1));
+//    ofxDmxCenter::get().addFixture(make_shared<MainFloor>("mainfloor", 288 + 1 + 12 * 2));
 //    ofxDmxCenter::get().addFixture(make_shared<MainFloor>("mainfloor", 244));
     
     ofxDmxCenter::get().addFixture(make_shared<SingleLED>("icecream", 7*48 + 15 * 3 + 1));
     ofxDmxCenter::get().addFixture(make_shared<TableSet>("tableset", 241));
     ofxDmxCenter::get().addFixture(make_shared<RGBFixture>("desk", 7*48 + 14 * 3 + 1));
     ofxDmxCenter::get().addFixture(make_shared<RGBFixture>("novelty", 268));
-
+    ofxDmxCenter::get().addFixture(make_shared<AnglepoiseSet>("anglepoises", 288 + 1));
+    ofxDmxCenter::get().addFixture(make_shared<Kitchen>("kitchen", 97));
+    
+    
+    	ofxDmxCenter::get().addFixture(make_shared<SingleLED>("icecream", 48 + 12 * 3 + 1));
 
     ofxParameterMapper::get();
     
@@ -92,7 +96,7 @@ void ofApp::keyPressed(int key) {
         ofxMidiMapper::get().save();
     });
     KEY('l', {
-//        ofxDmxCenter::get().loadFixtureData();
+        ofxDmxCenter::get().loadFixtureData();
         ofxMidiMapper::get().load();
     });
     
@@ -110,13 +114,13 @@ void ofApp::newOscMessage(ofxOscCenterNewMessageArgs &args) {
     if (address.find("/MIDI/note") != string::npos) {
         ofxMidiMessage midiMessage;
         midiMessage.pitch = message.getArgAsInt(1);
-        midiMessage.velocity = message.getArgAsInt(2);
+        midiMessage.velocity = message.getArgAsInt(2) > 10 ? 127 : 0;
         if (midiMessage.velocity > 0) midiMessage.status = MIDI_NOTE_ON;
         else midiMessage.status = MIDI_NOTE_OFF;
         
         ofxMidiMapper::get().newMidiMessage(midiMessage);
         
-        cout << "new midi with velocity " << midiMessage.velocity << endl;
+        //cout << "new midi with velocity " << midiMessage.velocity << endl;
     }
     else if (address.find("/MIDI/cc") != string::npos) {
         ofxMidiMessage midiMessage;
