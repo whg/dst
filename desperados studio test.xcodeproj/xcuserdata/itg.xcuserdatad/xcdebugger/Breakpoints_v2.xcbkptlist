@@ -9,13 +9,93 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Fixture.cpp"
-            timestampString = "477769758.304704"
+            filePath = "../../../../include/whelpersg/ofxParameterMapper.h"
+            timestampString = "477836311.993715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "FadoColumn::update()"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "ofxParameterMapper::modifyParams(const vector&lt;ofxBaseGui*&gt; &amp;baseGuis, T v, float min, float max, string &amp;commandString)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void ofxParameterMapper::modifyParams&lt;int&gt;(std::__1::vector&lt;ofxBaseGui*, std::__1::allocator&lt;ofxBaseGui*&gt; &gt; const&amp;, int, float, float, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/itg/Code/include/whelpersg/ofxParameterMapper.h"
+                  timestampString = "477836312.874842"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "516">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "void ofxParameterMapper::modifyParams&lt;float&gt;(std::__1::vector&lt;ofxBaseGui*, std::__1::allocator&lt;ofxBaseGui*&gt; &gt; const&amp;, float, float, float, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;&amp;)"
+                  moduleName = "desperados studio testDebug"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/itg/Code/include/whelpersg/ofxParameterMapper.h"
+                  timestampString = "477836312.875064"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "518">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../include/whelpersg/ofxParameterMapper.cpp"
+            timestampString = "477837997.294116"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "ofxParameterMapper::guiSelected(ofxGuiSelectedArgs &amp;args)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../include/whelpersg/ofxDmxCenter.cpp"
+            timestampString = "478018388.006925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "ofxDmxCenter::threadedFunction()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/Fixture.cpp"
+            timestampString = "478165048.584839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
+            landmarkName = "Pendants::paramChanged(unsigned char &amp;v)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

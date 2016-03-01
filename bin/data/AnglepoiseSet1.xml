@@ -1,0 +1,24 @@
+<AnglepoiseSet1>
+	<DMX>
+		<Start_addr max="512" min="0">90</Start_addr>
+		<Num_chans max="32" min="1">45</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<update>1</update>
+	<audio_input max="1" min="0">0</audio_input>
+	<max_val max="1" min="0">1</max_val>
+	<decay>1</decay>
+	<decay_amount max="1" min="0">0.7</decay_amount>
+	<g1 max="255" min="0">0, 255, 0, 255</g1>
+	<g2 max="255" min="0">0, 255, 0, 255</g2>
+	<y1 max="255" min="0">255, 250, 0, 255</y1>
+	<y2 max="255" min="0">255, 250, 0, 255</y2>
+	<r1 max="255" min="0">255, 0, 0, 255</r1>
+	<r2 max="255" min="0">255, 0, 0, 255</r2>
+	<g3>0, 255, 0, 255</g3>
+	<g4>0, 255, 0, 255</g4>
+	<y3>255, 250, 0, 255</y3>
+	<y4>255, 250, 0, 255</y4>
+	<r3>255, 0, 0, 255</r3>
+	<r4>255, 0, 0, 255</r4>
+</AnglepoiseSet1>

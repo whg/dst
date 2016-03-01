@@ -1,0 +1,9 @@
+<rgb1>
+	<DMX>
+		<Start_addr max="512" min="0">46</Start_addr>
+		<Num_chans max="32" min="1">4</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<dimmer max="255" min="0">0</dimmer>
+	<colour>160, 0, 0, 255</colour>
+</rgb1>

@@ -1,0 +1,19 @@
+<mainfloor1>
+	<DMX>
+		<Start_addr max="512" min="0">244</Start_addr>
+		<Num_chans max="32" min="1">30</Num_chans>
+		<U>EN150107</U>
+	</DMX>
+	<update>1</update>
+	<presetcolour>0, 0, 0, 255</presetcolour>
+	<anglepoise1>0, 0, 0, 255</anglepoise1>
+	<anglepoise2>0, 0, 0, 255</anglepoise2>
+	<anglepoise3>0, 0, 0, 255</anglepoise3>
+	<anglepoise4>0, 0, 0, 255</anglepoise4>
+	<anglepoise5>0, 0, 0, 255</anglepoise5>
+	<anglepoise6>0, 0, 0, 255</anglepoise6>
+	<anglepoise7>0, 0, 0, 255</anglepoise7>
+	<anglepoise8>0, 0, 0, 255</anglepoise8>
+	<anglepoise9>0, 0, 0, 255</anglepoise9>
+	<anglepoise10>0, 0, 0, 255</anglepoise10>
+</mainfloor1>

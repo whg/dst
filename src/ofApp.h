@@ -4,6 +4,7 @@
 #include "ofxDmx.h"
 #include "ofxMidi.h"
 
+class ofxOscCenterNewMessageArgs;
 
 class ofApp : public ofBaseApp{
 public:
@@ -15,4 +16,6 @@ public:
     
     ofxMidiIn midiIn;
     
+    void newOscMessage(ofxOscCenterNewMessageArgs &args);
+
 };
